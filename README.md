@@ -1,8 +1,36 @@
 # Claude Code 플러그인 설치 가이드
 
-Ponytail, Claude-video, Taste, Hyperframes 4개 플러그인/스킬을 Claude Code에 설치하는 절차를 정리한 문서입니다.
+Ponytail, Claude-video, Taste, Hyperframes 4개 플러그인/스킬을 Claude Code에 설치하는 절차와 사용법을 정리한 문서입니다.
 
-## 핵심 요약
+## 설치 현황 (로컬 CLI 기준)
+
+| 항목 | 버전 | 상태 | 호출 방식 |
+|---|---|---|---|
+| Ponytail | v4.10.0 | 설치 완료 | 세션 시작 시 자동 활성화 |
+| Claude-video (watch) | v0.2.0 | 설치 완료 | `/watch [URL]`로 수동 호출 |
+| Taste | 확인 필요 | 설치 완료(상세 버전·설명 확인 필요) | 문맥 인식 자동 호출 / `/design-taste-frontend` 수동 호출 |
+| Hyperframes | 스킬 10개 | 설치 완료 | `/hyperframes`로 진입, 나머지는 자동 로드 |
+
+> ⚠️ **보안 조치 필요**: `watch` 설치 시 `~/.config/watch/.env` 파일 권한이 과도하게 열려 있다는 경고가 발생했습니다. API 키 유출을 막기 위해 로컬 터미널에서 다음을 실행하십시오.
+> ```
+> chmod 600 ~/.config/watch/.env
+> ```
+
+## 명령어 요약
+
+| 도구 | 명령 | 기능 |
+|---|---|---|
+| Ponytail | `/ponytail lite\|full\|ultra` | 강도 조절 |
+| Ponytail | `/ponytail-review` | 현재 변경분에서 과설계 탐지 |
+| Ponytail | `/ponytail-audit` | 저장소 전체에서 불필요한 코드 탐지 |
+| Ponytail | `/ponytail-debt` | `ponytail:` 주석(미룬 작업) 모아보기 |
+| Ponytail | `/ponytail-help` | 명령어 요약 |
+| Ponytail | "stop ponytail" / "normal mode" | 끄기 |
+| Claude-video | `/watch [URL 또는 파일] 요약해줘` | 영상 분석·요약 (yt-dlp, ffmpeg 필요; 자막 없는 영상은 Whisper API 키 필요) |
+| Taste | `/design-taste-frontend` | 디자인 스타일 직접 호출 (평소엔 "랜딩 페이지 만들어줘" 등 요청 시 자동 적용) |
+| Hyperframes | `/hyperframes` | 영상/모션그래픽 제작 진입점 (하위 스킬 core/animation/keyframes/audio/cli/registry/studio/creative/media-use는 필요 시 자동 로드) |
+
+## 핵심 요약 (설치 절차 — 재설치·타 기기 설치 시 참고)
 
 - claude.ai 채팅창에서는 로컬 컴퓨터에 직접 설치할 수 없습니다. 아래 명령을 각자의 환경(Claude Code 입력창 또는 터미널)에 직접 붙여넣어야 합니다.
 - 4개 모두 합쳐 5분 내외로 설치가 끝납니다.
