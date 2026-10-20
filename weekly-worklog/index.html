@@ -1,0 +1,1497 @@
+<title>총무부 주간업무일지</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: 결재판처럼 상단 고정 탭바 + 최대 1160px 본문. 주간보고 탭은 결재란이 있는 A4 공문 한 장처럼 그린다. */
+:root {
+  --bg: #F2F4F7;
+  --surface: #FFFFFF;
+  --surface-2: #F7F8FA;
+  --ink: #18212E;
+  --muted: #586374;
+  --line: #D6DCE4;
+  --accent: #2A4877;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #E4EBF5;
+  --stamp: #B8392B;
+  --stamp-soft: #FAE8E5;
+  --done: #2B7653;
+  --done-soft: #E1F1E8;
+  --plan: #687183;
+  --plan-soft: #EBEEF2;
+  --star: #A86E14;
+  --scrim: rgba(12, 18, 28, 0.45);
+  --shadow: 0 1px 2px rgba(20, 30, 50, 0.06), 0 8px 24px rgba(20, 30, 50, 0.07);
+  --font-display: "Gowun Batang", "Nanum Myeongjo", "AppleMyungjo", "Batang", serif;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10141A; --surface: #181F28; --surface-2: #1D2530; --ink: #E4E8EE; --muted: #9AA4B2;
+    --line: #2B3441; --accent: #8DADE2; --accent-ink: #0E1622; --accent-soft: #1E2A3C;
+    --stamp: #E06B5C; --stamp-soft: #3A2320; --done: #5CBD8C; --done-soft: #1A3227;
+    --plan: #9AA4B2; --plan-soft: #242C37; --star: #E2B04A; --scrim: rgba(0, 0, 0, 0.6);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.28);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10141A; --surface: #181F28; --surface-2: #1D2530; --ink: #E4E8EE; --muted: #9AA4B2;
+  --line: #2B3441; --accent: #8DADE2; --accent-ink: #0E1622; --accent-soft: #1E2A3C;
+  --stamp: #E06B5C; --stamp-soft: #3A2320; --done: #5CBD8C; --done-soft: #1A3227;
+  --plan: #9AA4B2; --plan-soft: #242C37; --star: #E2B04A; --scrim: rgba(0, 0, 0, 0.6);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.28);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.55; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+h1, h2, h3, h4 { text-wrap: balance; }
+p { margin: 0; }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.inner { max-width: 1160px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* App bar */
+.appbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
+.appbar .inner { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; padding-block: 14px 0; }
+.brand { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; min-width: 0; }
+.brand h1 { font-family: var(--font-display); font-size: 22px; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+.store-badge { font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+.store-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--plan); }
+.store-badge[data-mode="db"]::before { background: var(--done); }
+.tabs { display: flex; gap: 2px; overflow-x: auto; width: 100%; scrollbar-width: none; margin-top: 6px; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { appearance: none; border: 0; background: none; font: inherit; font-size: 14px; font-weight: 600; color: var(--muted); padding: 10px 12px 12px; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; }
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+
+main.inner { padding-block: 20px 72px; }
+.view { display: grid; gap: 16px; min-width: 0; }
+.view-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: flex-end; justify-content: space-between; }
+.view-head h2 { font-family: var(--font-display); font-size: 24px; margin: 0 0 4px; }
+.view-head p { color: var(--muted); max-width: 62ch; font-size: 14px; }
+
+/* Buttons */
+.btn { appearance: none; font: inherit; font-size: 14px; font-weight: 600; border-radius: 8px; padding: 7px 14px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 38px; white-space: nowrap; }
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.ghost { background: transparent; }
+.btn.danger { color: var(--stamp); border-color: var(--stamp); background: transparent; }
+.btn.armed { background: var(--stamp); color: var(--surface); border-color: var(--stamp); }
+.btn[disabled] { opacity: 0.45; cursor: not-allowed; }
+.btn .count { font-family: var(--font-mono); background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 0 7px; font-size: 12px; line-height: 1.6; }
+.icon-btn { width: 38px; padding: 0; font-size: 16px; }
+.inline { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+/* Toolbar / week nav */
+.toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+.weeknav { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.weeklabel { display: flex; flex-direction: column; line-height: 1.25; padding: 0 6px; min-width: 0; }
+.weeklabel strong { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 15px; font-weight: 500; }
+.weeklabel span { font-size: 12px; color: var(--muted); }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.stats { display: flex; flex-wrap: wrap; gap: 8px; }
+.stat { display: inline-flex; align-items: baseline; gap: 8px; padding: 6px 12px; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.stat b { font-family: var(--font-mono); font-size: 18px; color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
+.stat.late b { color: var(--stamp); }
+.stat.done b { color: var(--done); }
+
+.banner { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; padding: 10px 14px; border-radius: var(--r); background: var(--accent-soft); font-size: 14px; }
+.banner.warn { background: var(--stamp-soft); }
+#weekBanners:empty { display: none; }
+#weekBanners { display: grid; gap: 8px; }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); min-width: 0; }
+.pad { padding: 18px; display: grid; gap: 14px; align-content: start; }
+.pad h3 { font-family: var(--font-display); font-size: 18px; margin: 0; }
+.pad h4 { font-size: 14px; margin: 0; }
+
+/* Pills, bars */
+.pill { display: inline-flex; align-items: center; font-size: 12px; font-weight: 600; padding: 0 8px; border-radius: 999px; line-height: 1.7; white-space: nowrap; vertical-align: middle; }
+.pill.done { background: var(--done-soft); color: var(--done); }
+.pill.doing { background: var(--accent-soft); color: var(--accent); }
+.pill.late { background: var(--stamp-soft); color: var(--stamp); }
+.pill.plan { background: var(--plan-soft); color: var(--plan); }
+.pill.example { border: 1px dashed var(--muted); color: var(--muted); font-weight: 500; }
+.tag-carry { font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; white-space: nowrap; }
+.mark { color: var(--star); font-size: 13px; margin-left: 4px; }
+.bar { height: 6px; border-radius: 3px; background: var(--plan-soft); overflow: hidden; width: 100%; }
+.bar > i { display: block; height: 100%; width: var(--w); background: var(--accent); }
+.bar.done > i { background: var(--done); }
+.bar.late > i { background: var(--stamp); }
+.pct { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 6px; flex-wrap: wrap; }
+
+/* Data grid: table on wide screens, cards on phones */
+.tablewrap { overflow-x: auto; }
+.grid { width: 100%; min-width: 900px; border-collapse: separate; border-spacing: 0; table-layout: fixed; font-size: 14px; }
+.grid th { text-align: left; font-size: 12px; color: var(--muted); font-weight: 600; padding: 10px 12px; border-bottom: 1px solid var(--line); background: var(--surface-2); letter-spacing: 0.02em; }
+.grid th:first-child { border-top-left-radius: var(--r); }
+.grid th:last-child { border-top-right-radius: var(--r); }
+.grid td { padding: 12px; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere; }
+.grid .cell { min-width: 0; }
+.grid tbody tr:last-child td { border-bottom: 0; }
+.grid tbody tr[data-act] { cursor: pointer; }
+.grid tbody tr[data-act]:hover td { background: var(--surface-2); }
+.grid .unit b { font-weight: 600; }
+.grid .cat { font-size: 13px; font-weight: 600; color: var(--accent); }
+.grid .txt { color: var(--ink); font-size: 13.5px; }
+.grid td.num { font-size: 13px; white-space: nowrap; }
+.grid .sub { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+@media (max-width: 760px) {
+  .tablewrap { overflow: visible; }
+  .grid { min-width: 0; border: 0; }
+  .grid thead { display: none; }
+  .grid, .grid tbody, .grid tr, .grid td { display: block; width: auto; }
+  .grid tbody { display: grid; gap: 10px; }
+  .grid tr { border: 1px solid var(--line); border-radius: var(--r); padding: 10px 14px; background: var(--surface); }
+  .grid td { border: 0; padding: 4px 0; display: grid; grid-template-columns: 78px minmax(0, 1fr); gap: 10px; }
+  .grid td::before { content: attr(data-label); color: var(--muted); font-size: 12px; padding-top: 2px; }
+  .grid td[data-empty] { display: none; }
+  .grid tbody tr:last-child td { border-bottom: 0; }
+  .grid tbody tr[data-act]:hover td { background: transparent; }
+  .gridpanel { background: transparent; border: 0; }
+}
+
+.empty { padding: 44px 20px; display: grid; gap: 12px; justify-items: center; text-align: center; color: var(--muted); }
+.empty h3 { font-family: var(--font-display); color: var(--ink); font-size: 20px; margin: 0; }
+.empty p { max-width: 46ch; }
+
+/* Report sheet */
+.sheet { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 28px clamp(16px, 4vw, 40px) 32px; box-shadow: var(--shadow); display: grid; gap: 22px; min-width: 0; }
+.sheet-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: flex-start; border-bottom: 2px solid var(--ink); padding-bottom: 16px; }
+.eyebrow { font-size: 12px; letter-spacing: 0.12em; color: var(--muted); font-weight: 600; }
+.sheet-head h2 { font-family: var(--font-display); font-size: 30px; margin: 2px 0 10px; letter-spacing: 0.06em; }
+.meta { display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; margin: 0; font-size: 13px; }
+.meta dt { color: var(--muted); }
+.meta dd { margin: 0; }
+.approval { border-collapse: collapse; font-size: 12px; }
+.approval th, .approval td { border: 1px solid var(--ink); width: 66px; text-align: center; }
+.approval th { padding: 4px 2px; font-weight: 600; background: var(--surface-2); }
+.approval td { height: 54px; }
+.approval .side { width: 26px; writing-mode: vertical-rl; letter-spacing: 0.3em; background: var(--surface-2); font-weight: 600; }
+.sheet-summary { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--muted); }
+.sheet-summary b { color: var(--ink); font-family: var(--font-mono); font-weight: 500; }
+.sheet-scroll { overflow-x: auto; }
+.report { width: 100%; min-width: 880px; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
+.report th, .report td { border: 1px solid var(--line); padding: 8px; vertical-align: top; text-align: left; overflow-wrap: anywhere; }
+.report th { background: var(--surface-2); font-weight: 600; white-space: nowrap; text-align: center; }
+.report td.num { text-align: center; white-space: nowrap; }
+.report .late-cell { color: var(--stamp); }
+.sheet-sec { display: grid; gap: 10px; }
+.sheet-sec h3 { font-family: var(--font-display); font-size: 17px; margin: 0; padding-left: 10px; border-left: 3px solid var(--accent); }
+.nextlist { margin: 0; padding-left: 20px; display: grid; gap: 4px; font-size: 14px; }
+
+/* Forms */
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > span { font-size: 13px; font-weight: 600; color: var(--muted); display: flex; gap: 8px; align-items: baseline; }
+.field em { font-style: normal; color: var(--stamp); font-size: 11px; }
+.field small { font-weight: 400; }
+input[type="text"], input[type="date"], input[type="month"], input[type="search"], select, textarea {
+  font: inherit; font-size: 16px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; width: 100%; min-width: 0;
+}
+textarea { resize: vertical; line-height: 1.55; }
+input:focus, select:focus, textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-soft); }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
+.f-row { display: grid; gap: 12px; }
+.f-row.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 560px) { .f-row.two { grid-template-columns: minmax(0, 1fr); } }
+.check { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
+.quick { display: flex; flex-wrap: wrap; gap: 4px; }
+.quick button { appearance: none; font: 500 12px var(--font-mono); padding: 4px 9px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.quick button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+output { font-family: var(--font-mono); color: var(--ink); }
+
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; width: fit-content; }
+.seg label { position: relative; padding: 6px 16px; cursor: pointer; font-size: 14px; }
+.seg label + label { border-left: 1px solid var(--line); }
+.seg input, .chip input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label:has(input:checked) { background: var(--accent); color: var(--accent-ink); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { position: relative; display: inline-flex; align-items: center; padding: 4px 11px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; cursor: pointer; user-select: none; background: var(--surface); }
+.chip:has(input:checked) { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.chip:has(input:focus-visible), .seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Dialog */
+dialog { border: 1px solid var(--line); border-radius: 14px; padding: 0; width: min(680px, calc(100% - 24px)); max-height: calc(100% - 24px); background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+dialog::backdrop { background: var(--scrim); }
+dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24px); }
+.dlg-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 18px 20px 6px; }
+.dlg-head h2 { font-family: var(--font-display); margin: 0; font-size: 21px; }
+.dlg-body { overflow: auto; padding: 10px 20px 18px; display: grid; gap: 14px; }
+.dlg-foot { display: flex; gap: 8px; padding: 12px 20px; border-top: 1px solid var(--line); align-items: center; flex-wrap: wrap; }
+.spacer { flex: 1; }
+.career { border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); }
+.career summary { padding: 12px 14px; cursor: pointer; font-weight: 600; }
+.career summary small { color: var(--muted); font-weight: 400; margin-left: 6px; }
+.career[open] summary { border-bottom: 1px solid var(--line); }
+.career-body { padding: 14px; display: grid; gap: 14px; }
+.hint { padding: 8px 12px; border-radius: 8px; background: var(--done-soft); color: var(--done); font-size: 13px; }
+.copy-area { width: 100%; min-height: 240px; font-family: var(--font-mono); font-size: 13px; }
+
+/* Log */
+.filters { padding: 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; align-items: end; }
+.filters .checks { display: flex; flex-wrap: wrap; gap: 6px 16px; padding-bottom: 8px; }
+.catsum { padding: 16px 18px; display: grid; gap: 10px; }
+.catsum h3 { font-family: var(--font-display); font-size: 17px; margin: 0 0 4px; }
+.catrow { display: grid; grid-template-columns: minmax(84px, 120px) minmax(0, 1fr) auto; gap: 12px; align-items: center; font-size: 13px; }
+.catrow .lbl { font-weight: 600; }
+.catrow .val { font-family: var(--font-mono); color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* Portfolio */
+.pf { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 880px) { .pf { grid-template-columns: minmax(0, 1fr); } }
+.purpose { border: 0; margin: 0; padding: 0; display: grid; gap: 8px; min-width: 0; }
+.purpose legend { font-size: 13px; font-weight: 600; color: var(--muted); padding: 0; margin-bottom: 6px; }
+.purpose label { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; background: var(--surface); }
+.purpose label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.purpose input { grid-row: span 2; margin-top: 5px; }
+.purpose b { font-weight: 600; }
+.purpose small { color: var(--muted); font-size: 12px; }
+.ready { border-radius: 8px; background: var(--surface-2); border: 1px solid var(--line); padding: 12px; display: grid; gap: 8px; font-size: 13px; }
+.ready ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.ready .linkish { appearance: none; border: 0; background: none; color: var(--accent); font: inherit; font-weight: 600; cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 2px; }
+.pf-output { padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.out-head { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; }
+#pfStatus { font-size: 13px; flex: 1 1 240px; }
+#pfOut { min-height: 520px; font-size: 14.5px; line-height: 1.7; }
+
+/* Setup */
+.setup-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+@media (max-width: 880px) { .setup-grid { grid-template-columns: minmax(0, 1fr); } }
+.data-block { display: grid; gap: 8px; padding-top: 14px; border-top: 1px solid var(--line); }
+.row-end { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: flex-end; }
+
+#toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-size: 14px; max-width: calc(100% - 32px); z-index: 60; box-shadow: var(--shadow); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<header class="appbar">
+  <div class="inner">
+    <div class="brand">
+      <h1>총무부 주간업무일지</h1>
+      <span class="store-badge" id="storeBadge" data-mode="connecting">저장소 연결 중…</span>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="화면 전환">
+      <button class="tab" role="tab" data-act="tab" data-tab="week" aria-selected="true">이번 주 입력</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="report" aria-selected="false">주간보고</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="log" aria-selected="false">누적 기록</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="portfolio" aria-selected="false">포트폴리오 생성</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="setup" aria-selected="false">설정 · 백업</button>
+    </nav>
+  </div>
+</header>
+
+<main class="inner">
+  <!-- 1. 이번 주 입력 -->
+  <section id="view-week" class="view" role="tabpanel">
+    <div id="weekBanners"></div>
+    <div class="toolbar">
+      <div class="weeknav" data-weeknav></div>
+      <div class="actions" id="weekActions"></div>
+    </div>
+    <div class="stats" id="weekStats"></div>
+    <div id="weekList"></div>
+  </section>
+
+  <!-- 2. 주간보고 -->
+  <section id="view-report" class="view" role="tabpanel" hidden>
+    <div class="toolbar">
+      <div class="weeknav" data-weeknav></div>
+      <div class="actions">
+        <button class="btn" data-act="copyWeek">표 복사</button>
+        <button class="btn primary" data-act="exportWeek" data-needs="xlsx dl">엑셀 저장</button>
+      </div>
+    </div>
+    <article class="sheet">
+      <div id="reportHead"></div>
+      <div class="sheet-summary" id="reportSummary"></div>
+      <div class="sheet-scroll" id="reportTable"></div>
+      <section class="sheet-sec">
+        <h3>다음 주 계획</h3>
+        <div id="reportNext"></div>
+      </section>
+      <section class="sheet-sec">
+        <h3><label for="weekMemo">특이사항 · 건의사항</label></h3>
+        <textarea id="weekMemo" rows="4" placeholder="이번 주 특이사항, 결재·협조가 필요한 사항을 적어 주세요. 자동 저장됩니다."></textarea>
+        <p class="muted small" id="memoState"></p>
+      </section>
+    </article>
+  </section>
+
+  <!-- 3. 누적 기록 -->
+  <section id="view-log" class="view" role="tabpanel" hidden>
+    <header class="view-head">
+      <div>
+        <h2>누적 기록</h2>
+        <p>여러 주에 걸친 같은 업무는 최신 상태 하나로 묶어 보여 줍니다. 행을 누르면 성과를 보완할 수 있습니다.</p>
+      </div>
+      <button class="btn" data-act="exportAll" data-needs="xlsx dl">전체 기록 엑셀 저장</button>
+    </header>
+    <div class="panel filters">
+      <label class="field"><span>시작 월</span><input type="month" id="logFrom"></label>
+      <label class="field"><span>종료 월</span><input type="month" id="logTo"></label>
+      <label class="field"><span>구분</span><select id="logCat"></select></label>
+      <label class="field"><span>상태</span>
+        <select id="logStatus">
+          <option value="">전체</option>
+          <option value="done">완료</option>
+          <option value="doing">진행중</option>
+          <option value="late">지연</option>
+          <option value="plan">예정</option>
+        </select>
+      </label>
+      <label class="field"><span>검색</span><input type="search" id="logQ" placeholder="업무명, 성과, 비고"></label>
+      <div class="checks">
+        <label class="check"><input type="checkbox" id="logGroup" checked> 업무별로 묶기</label>
+        <label class="check"><input type="checkbox" id="logStar"> ★ 대표 업무만</label>
+      </div>
+    </div>
+    <div class="panel catsum" id="logSummary"></div>
+    <div id="logList"></div>
+  </section>
+
+  <!-- 4. 포트폴리오 생성 -->
+  <section id="view-portfolio" class="view" role="tabpanel" hidden>
+    <header class="view-head">
+      <div>
+        <h2>포트폴리오 생성</h2>
+        <p>쌓인 업무 기록으로 문서 초안을 만듭니다. 기록에 없는 수치나 성과는 지어내지 않고 [수치 확인 필요]로 남깁니다.</p>
+      </div>
+    </header>
+    <div class="pf">
+      <form class="panel pad" id="pfForm" novalidate>
+        <fieldset class="purpose">
+          <legend>문서 종류</legend>
+          <label><input type="radio" name="pfPurpose" id="pfP-career" value="career" checked><b>이직용 경력기술서</b><small>STAR 형식 · 정량 성과 중심</small></label>
+          <label><input type="radio" name="pfPurpose" id="pfP-annual" value="annual"><b>교회 연간 업무보고</b><small>분야별 실적 표 · 격식 있는 보고체</small></label>
+          <label><input type="radio" name="pfPurpose" id="pfP-review" value="review"><b>인사평가 · 자기평가서</b><small>목표 대비 실적 · 성장한 역량</small></label>
+          <label><input type="radio" name="pfPurpose" id="pfP-apply" value="apply"><b>자격 · 학업 지원서</b><small>실무경력 요약 · 대표 경험 · 증빙 목록</small></label>
+        </fieldset>
+        <div class="f-row two">
+          <label class="field"><span>시작 월</span><input type="month" id="pfFrom"></label>
+          <label class="field"><span>종료 월</span><input type="month" id="pfTo"></label>
+        </div>
+        <label class="field"><span>포함 범위</span>
+          <select id="pfScope">
+            <option value="done">완료한 업무</option>
+            <option value="star">★ 대표 업무만</option>
+            <option value="all">진행 중 업무 포함 전체</option>
+          </select>
+        </label>
+        <div class="field"><span>분야</span><div class="chips" id="pfCats"></div></div>
+        <label class="field"><span>지원 직무 · 기관 · 분야 <small>선택</small></span><input type="text" id="pfTarget" placeholder="예: 공공기관 시설관리 담당, 사회복지 대학원"></label>
+        <div class="ready" id="pfReady"></div>
+        <div class="inline">
+          <button type="button" class="btn primary" data-act="genPf" id="btnGen" data-needs="sample">초안 생성</button>
+          <button type="button" class="btn danger" data-act="stopPf" id="btnStop" hidden>중지</button>
+          <button type="button" class="btn" data-act="copyPrompt">프롬프트 복사</button>
+        </div>
+        <p class="muted small" id="pfNote"></p>
+      </form>
+      <section class="panel pf-output">
+        <div class="out-head">
+          <p id="pfStatus" class="muted">문서 종류와 기간을 고른 뒤 [초안 생성]을 누르세요.</p>
+          <div class="inline">
+            <button class="btn" data-act="copyPf">복사</button>
+            <button class="btn" data-act="savePf" data-needs="dl">.md 저장</button>
+          </div>
+        </div>
+        <label for="pfOut" class="sr-only">생성된 초안</label>
+        <textarea id="pfOut" placeholder="생성된 초안이 여기에 표시됩니다. 직접 고쳐 쓸 수 있습니다."></textarea>
+      </section>
+    </div>
+  </section>
+
+  <!-- 5. 설정 · 백업 -->
+  <section id="view-setup" class="view" role="tabpanel" hidden>
+    <header class="view-head"><div><h2>설정 · 백업</h2><p>목록과 결재란은 교회 상황에 맞게 고쳐 쓰세요. 바꿔도 기존 기록은 그대로 남습니다.</p></div></header>
+    <div class="setup-grid">
+      <form class="panel pad" id="setForm" novalidate>
+        <h3>기본 정보</h3>
+        <div class="f-row two">
+          <label class="field"><span>부서명</span><input type="text" id="setDept" autocomplete="off"></label>
+          <label class="field"><span>담당자(본인) 이름</span><input type="text" id="setOwner" autocomplete="off" placeholder="새 업무의 담당자로 자동 입력"></label>
+        </div>
+        <div class="f-row two">
+          <label class="field"><span>한 주의 시작 요일</span>
+            <select id="setWeekStart">
+              <option value="1">월요일</option>
+              <option value="2">화요일 (월요일 휴무 시)</option>
+              <option value="0">일요일</option>
+            </select>
+          </label>
+          <label class="field"><span>결재란 <small>쉼표로 구분</small></span><input type="text" id="setApprovals" autocomplete="off" placeholder="담당, 부장, 담임목사"></label>
+        </div>
+        <div class="f-row two">
+          <label class="field"><span>구분 목록 <small>한 줄에 하나</small></span><textarea id="setCats" rows="9"></textarea></label>
+          <label class="field"><span>역량 태그 <small>한 줄에 하나</small></span><textarea id="setSkills" rows="9"></textarea></label>
+        </div>
+        <div class="row-end">
+          <span class="muted small" id="setState"></span>
+          <button type="submit" class="btn primary" data-write>설정 저장</button>
+        </div>
+      </form>
+      <div class="panel pad">
+        <h3>데이터</h3>
+        <p class="small" id="storeInfo"></p>
+        <div id="stashBlock"></div>
+        <div class="data-block">
+          <h4>기존 ‘주요업무현황’ 엑셀 가져오기</h4>
+          <p class="muted small">구분·담당자·업무단위·업무계획·진행상황·완료예정일·진행률·비고 머리글을 찾아 자동으로 맞춥니다. 병합된 구분·담당자 칸은 위 값으로 채웁니다. 이 앱에서 저장한 ‘전체 기록’ 엑셀도 그대로 다시 가져올 수 있습니다.</p>
+          <div class="inline">
+            <label class="field"><span>넣을 주간 <small>파일에 주간 정보가 없을 때</small></span><input type="date" id="importWeek"></label>
+          </div>
+          <div class="inline">
+            <button class="btn" data-act="pickImport" data-needs="xlsx" data-write>엑셀·CSV 파일 선택</button>
+            <input type="file" id="importFile" accept=".xlsx,.xls,.csv" class="sr-only" tabindex="-1">
+          </div>
+          <div id="importResult"></div>
+        </div>
+        <div class="data-block">
+          <h4>백업 · 복원</h4>
+          <p class="muted small">한 달에 한 번 백업 파일을 저장해 두시면 안전합니다.</p>
+          <div class="inline">
+            <button class="btn" data-act="backupJson" data-needs="dl">백업 파일 저장 (.json)</button>
+            <button class="btn" data-act="pickRestore" data-write>백업에서 복원</button>
+            <input type="file" id="restoreFile" accept=".json,application/json" class="sr-only" tabindex="-1">
+          </div>
+          <div id="restoreResult"></div>
+        </div>
+        <div class="data-block" id="exampleBlock"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dialog id="entryDlg" aria-labelledby="dlgTitle">
+  <form id="entryForm" method="dialog" novalidate>
+    <header class="dlg-head">
+      <div>
+        <h2 id="dlgTitle">업무 추가</h2>
+        <p class="muted small" id="dlgWeek"></p>
+      </div>
+      <button type="button" class="btn ghost icon-btn" data-act="closeDlg" aria-label="닫기">✕</button>
+    </header>
+    <div class="dlg-body">
+      <div class="f-row two">
+        <label class="field"><span>구분</span><select id="fCategory"></select></label>
+        <label class="field"><span>담당자</span><input type="text" id="fOwner" autocomplete="off"></label>
+      </div>
+      <label class="field"><span>업무단위 <em>필수</em></span><input type="text" id="fUnit" autocomplete="off" placeholder="예: 본당 냉난방기 동절기 점검"></label>
+      <label class="field"><span>업무계획</span><textarea id="fPlan" rows="2" placeholder="이번 주에 하려는 일"></textarea></label>
+      <label class="field"><span>진행상황</span><textarea id="fProgress" rows="2" placeholder="실제로 진행한 내용"></textarea></label>
+      <div class="f-row two">
+        <label class="field"><span>완료예정일</span><input type="date" id="fDue"></label>
+        <div class="field">
+          <span>진행률 <output id="fPctOut" for="fPct">0%</output></span>
+          <input type="range" id="fPct" min="0" max="100" step="5" value="0" aria-label="진행률">
+          <div class="quick" id="pctQuick">
+            <button type="button" data-pct="0">0</button>
+            <button type="button" data-pct="25">25</button>
+            <button type="button" data-pct="50">50</button>
+            <button type="button" data-pct="75">75</button>
+            <button type="button" data-pct="100">100</button>
+          </div>
+        </div>
+      </div>
+      <label class="field"><span>비고</span><input type="text" id="fNote" autocomplete="off"></label>
+      <details class="career" id="careerBox">
+        <summary>커리어 기록<small>포트폴리오에 쓰이는 정보 · 선택 입력</small></summary>
+        <div class="career-body">
+          <p class="hint" id="careerHint" hidden>완료된 업무입니다. 성과를 한 줄만 적어 두면 경력기술서와 연간보고에 바로 쓰입니다.</p>
+          <div class="field">
+            <span>역할</span>
+            <div class="seg" role="radiogroup" aria-label="역할">
+              <label><input type="radio" name="fRole" id="fRole-lead" value="주도">주도</label>
+              <label><input type="radio" name="fRole" id="fRole-co" value="협업">협업</label>
+              <label><input type="radio" name="fRole" id="fRole-sup" value="지원">지원</label>
+            </div>
+          </div>
+          <label class="field"><span>정량 성과</span><input type="text" id="fImpact" autocomplete="off" placeholder="예: 업체 3곳 비교견적으로 예산 대비 120만원(8%) 절감"></label>
+          <div class="field"><span>역량 태그</span><div class="chips" id="fSkills"></div></div>
+          <label class="field"><span>증빙 자료</span><input type="text" id="fEvidence" autocomplete="off" placeholder="예: 결재문서 2026-112, 견적서 3건, 작업 전후 사진"></label>
+          <label class="field"><span>배운 점 · 개선점</span><input type="text" id="fLesson" autocomplete="off" placeholder="한 줄 회고"></label>
+          <label class="check"><input type="checkbox" id="fStar"> ★ 포트폴리오 대표 업무로 표시</label>
+        </div>
+      </details>
+    </div>
+    <footer class="dlg-foot">
+      <button type="button" class="btn danger" id="btnDelete" data-write>삭제</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn ghost" data-act="closeDlg">취소</button>
+      <button type="submit" class="btn primary" id="btnSave" data-write>저장</button>
+    </footer>
+  </form>
+</dialog>
+
+<dialog id="copyDlg" aria-labelledby="copyTitle">
+  <form method="dialog">
+    <header class="dlg-head">
+      <div><h2 id="copyTitle">직접 복사하기</h2><p class="muted small">이 화면에서 자동 복사가 막혀 있습니다. 아래 내용이 선택되어 있으니 Ctrl+C(⌘+C)로 복사하세요.</p></div>
+      <button type="button" class="btn ghost icon-btn" data-act="closeCopy" aria-label="닫기">✕</button>
+    </header>
+    <div class="dlg-body"><label for="copyArea" class="sr-only">복사할 내용</label><textarea id="copyArea" class="copy-area" readonly></textarea></div>
+    <footer class="dlg-foot"><span class="spacer"></span><button type="button" class="btn primary" data-act="closeCopy">닫기</button></footer>
+  </form>
+</dialog>
+
+<div id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+(() => {
+  'use strict';
+
+  /* ---------- 기본값 ---------- */
+  const DEF = {
+    dept: '총무부',
+    owner: '',
+    weekStartDay: 1,
+    approvals: ['담당', '부장', '담임목사'],
+    categories: ['시설관리', '방송·미디어', '재정·회계', '행정·문서', '행사·예배지원', '구매·자산', '안전·보안', 'IT·전산', '기타'],
+    skills: ['예산관리', '업체·계약관리', '안전관리', '장비운영', '문서·규정', '문제해결', '봉사자·인력관리', 'IT·디지털', '일정·행사기획', '대외협력'],
+  };
+  const ST = { done: '완료', doing: '진행중', late: '지연', plan: '예정' };
+  const DOW = ['일', '월', '화', '수', '목', '금', '토'];
+  const TABS = ['week', 'report', 'log', 'portfolio', 'setup'];
+  const LS_KEY = 'worklog.v1';
+  const LS_PF = 'worklog.pf.';
+  const HEAD8 = ['구분', '담당자', '업무단위', '업무계획', '진행상황', '완료예정일', '진행률', '비고'];
+  const PURPOSES = {
+    career: { label: '이직용 경력기술서', scope: 'done', file: '경력기술서' },
+    annual: { label: '교회 연간 업무보고', scope: 'all', file: '연간업무보고' },
+    review: { label: '인사평가 자기평가서', scope: 'all', file: '자기평가서' },
+    apply: { label: '자격·학업 지원서용 실무경력', scope: 'done', file: '실무경력기술' },
+  };
+
+  /* ---------- 상태 ---------- */
+  const S = {
+    mode: 'local', loaded: false, canWrite: true,
+    db: null, sample: null, downloads: null,
+    entries: [], weeks: {}, settings: clone(DEF),
+    weekStart: null, tab: 'week', stash: null,
+    editing: null, settingsDirty: false,
+    pf: { running: false, ctl: null, hasOut: false },
+  };
+
+  /* ---------- 유틸 ---------- */
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+  function nl(v) { return esc(v).replace(/\n/g, '<br>'); }
+  const pad = n => String(n).padStart(2, '0');
+  const ymd = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  function parseYmd(s) { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ''); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; }
+  function addDays(d, n) { const x = new Date(d); x.setDate(x.getDate() + n); return x; }
+  function today0() { const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); }
+  function startOfWeek(d, sd) { const x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); return addDays(x, -((x.getDay() - sd + 7) % 7)); }
+  const sd = () => Number(S.settings.weekStartDay) || 0;
+  const iso = () => new Date().toISOString();
+  const newId = () => (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'e' + Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
+  function clampPct(v) { const n = Math.round(Number(v)); return Number.isFinite(n) ? Math.min(100, Math.max(0, n)) : 0; }
+  function fmtMD(d) { return `${d.getMonth() + 1}.${pad(d.getDate())}`; }
+  function fmtDue(s) { const d = parseYmd(s); return d ? `${d.getMonth() + 1}.${pad(d.getDate())}(${DOW[d.getDay()]})` : ''; }
+  function fmtDot(d) { return `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()}.(${DOW[d.getDay()]})`; }
+  function weekLabel(ws) {
+    const we = addDays(ws, 6);
+    const y2 = we.getFullYear() !== ws.getFullYear() ? we.getFullYear() + '.' : '';
+    return `${ws.getFullYear()}.${pad(ws.getMonth() + 1)}.${pad(ws.getDate())}(${DOW[ws.getDay()]}) – ${y2}${pad(we.getMonth() + 1)}.${pad(we.getDate())}(${DOW[we.getDay()]})`;
+  }
+  function weekRelative(ws) {
+    const diff = Math.round((ws - startOfWeek(new Date(), sd())) / 6048e5);
+    if (diff === 0) return '이번 주';
+    if (diff === -1) return '지난주';
+    if (diff === 1) return '다음 주';
+    return diff < 0 ? `${-diff}주 전` : `${diff}주 후`;
+  }
+  function oneLine(v) { return String(v || '').replace(/\s*\n\s*/g, ' / ').trim(); }
+  function clip(v, n) { v = String(v || ''); return v.length > n ? v.slice(0, n) + '…' : v; }
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  let toastTimer = null;
+  function toast(msg) {
+    const t = $('#toast'); t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 3200);
+  }
+
+  /* ---------- 업무 계산 ---------- */
+  function refDate(ws) { const we = addDays(ws, 6), t = today0(); return ymd(we < t ? we : t); }
+  function statusOf(e, ref) {
+    const p = clampPct(e.pct);
+    if (p >= 100) return 'done';
+    if (e.due && e.due < ref) return 'late';
+    if (p <= 0) return 'plan';
+    return 'doing';
+  }
+  function entriesInWeek(ws) { const a = ymd(ws), b = ymd(addDays(ws, 6)); return S.entries.filter(e => e.week >= a && e.week <= b); }
+  function catIndex(c) { const i = S.settings.categories.indexOf(c); return i < 0 ? 999 : i; }
+  function sortEntries(list) {
+    return list.slice().sort((a, b) => catIndex(a.category) - catIndex(b.category)
+      || (a.due || '9999').localeCompare(b.due || '9999')
+      || (a.createdAt || '').localeCompare(b.createdAt || ''));
+  }
+  function countBy(list, ref) {
+    const c = { total: list.length, done: 0, doing: 0, late: 0, plan: 0 };
+    list.forEach(e => { c[statusOf(e, ref)]++; });
+    return c;
+  }
+  function carryCandidates() {
+    const cur = ymd(S.weekStart);
+    const past = S.entries.filter(e => e.week < cur).map(e => e.week).sort();
+    if (!past.length) return { list: [], from: null };
+    const from = startOfWeek(parseYmd(past[past.length - 1]), sd());
+    const curKeys = new Set(entriesInWeek(S.weekStart).map(e => e.taskKey || e.id));
+    return { list: entriesInWeek(from).filter(e => clampPct(e.pct) < 100 && !curKeys.has(e.taskKey || e.id)), from };
+  }
+  // 같은 업무(taskKey)가 여러 주에 걸쳐 있으면 하나로 묶는다. 커리어 항목은 가장 최근에 채운 값을 쓴다.
+  function groupTasks(list) {
+    const m = new Map();
+    list.forEach(e => { const k = e.taskKey || e.id; if (!m.has(k)) m.set(k, []); m.get(k).push(e); });
+    return [...m.values()].map(arr => {
+      arr.sort((a, b) => (a.week || '').localeCompare(b.week || '') || (a.createdAt || '').localeCompare(b.createdAt || ''));
+      const last = arr[arr.length - 1];
+      const pick = f => { for (let i = arr.length - 1; i >= 0; i--) { const v = arr[i][f]; if (Array.isArray(v) ? v.length : v) return v; } return f === 'skills' ? [] : ''; };
+      return {
+        rep: last, entries: arr, first: arr[0].week, last: last.week,
+        category: last.category, owner: last.owner, unit: last.unit, due: last.due, pct: clampPct(last.pct),
+        plan: pick('plan'), progressNote: pick('progressNote'), note: pick('note'),
+        role: pick('role'), impact: pick('impact'), skills: pick('skills'), evidence: pick('evidence'), lesson: pick('lesson'),
+        star: arr.some(x => x.star), example: arr.every(x => x.example),
+      };
+    });
+  }
+  function single(e) { return groupTasks([e])[0]; }
+  function realOrExamples(list) { const real = list.filter(e => !e.example); return real.length ? real : list; }
+
+  /* ---------- 저장 ---------- */
+  function loadLocal() {
+    try {
+      const raw = localStorage.getItem(LS_KEY);
+      if (!raw) return null;
+      const d = JSON.parse(raw);
+      return { entries: Array.isArray(d.entries) ? d.entries : [], weeks: d.weeks || {}, settings: d.settings || null };
+    } catch (e) { return null; }
+  }
+  function saveLocal() {
+    try { localStorage.setItem(LS_KEY, JSON.stringify({ entries: S.entries, weeks: S.weeks, settings: S.settings })); } catch (e) { /* 저장소 차단 */ }
+  }
+  function normSettings(s) {
+    const o = Object.assign(clone(DEF), s || {});
+    ['approvals', 'categories', 'skills'].forEach(k => { if (!Array.isArray(o[k])) o[k] = clone(DEF[k]); });
+    return o;
+  }
+  async function retry(fn) {
+    try { return await fn(); }
+    catch (e) { if (e && e.code === 'unavailable') { await sleep(400 + Math.random() * 600); return fn(); } throw e; }
+  }
+  const cleanDoc = e => { const o = clone(e); delete o.isNew; return o; };
+  async function putEntry(e) {
+    e.updatedAt = iso();
+    if (S.mode === 'db') return retry(() => S.db.collection('entries').doc(e.id).set(cleanDoc(e)));
+    const i = S.entries.findIndex(x => x.id === e.id);
+    if (i >= 0) S.entries[i] = cleanDoc(e); else S.entries.push(cleanDoc(e));
+    saveLocal(); scheduleRender();
+  }
+  async function removeEntry(id) {
+    if (S.mode === 'db') return retry(() => S.db.collection('entries').doc(id).delete());
+    S.entries = S.entries.filter(x => x.id !== id); saveLocal(); scheduleRender();
+  }
+  async function putSettings(s) {
+    if (S.mode === 'db') return retry(() => S.db.doc('settings/main').set(clone(s)));
+    S.settings = normSettings(s); saveLocal(); scheduleRender();
+  }
+  async function putWeek(key, data) {
+    if (S.mode === 'db') return retry(() => S.db.collection('weeks').doc(key).set(data));
+    S.weeks[key] = data; saveLocal();
+  }
+  function writeErr(err) {
+    const c = err && err.code;
+    if (c === 'invalid_argument') { S.canWrite = false; scheduleRender(); toast('이 기록을 저장할 권한이 없습니다. 보기 전용으로 전환합니다.'); }
+    else if (c === 'quota_exceeded') toast('저장 공간이 가득 찼습니다. 백업 후 오래된 기록을 정리해 주세요.');
+    else if (c === 'resource_exhausted') toast('요청이 많습니다. 잠시 후 다시 시도해 주세요.');
+    else { toast('저장하지 못했습니다. 잠시 후 다시 시도해 주세요.'); console.error(err); }
+  }
+  async function putMany(list, fn) {
+    let n = 0;
+    for (const item of list) { await fn(item); n++; }
+    return n;
+  }
+
+  /* ---------- 연결 ---------- */
+  function connect() {
+    const c = window.claude;
+    if (!c || typeof c.use !== 'function') { S.loaded = true; scheduleRender(); return; }
+    c.use('db').then(db => {
+      if (!db) { S.loaded = true; scheduleRender(); return; }
+      const local = { entries: S.entries, weeks: S.weeks, settings: S.settings };
+      if (local.entries.length) S.stash = local;
+      S.db = db; S.mode = 'db'; S.entries = []; S.weeks = {};
+      db.collection('entries').onSnapshot(snap => {
+        S.entries = snap.docs.map(d => Object.assign({}, d.data(), { id: d.id }));
+        S.loaded = true; scheduleRender();
+      }, () => { S.loaded = true; toast('저장소 연결이 끊겼습니다. 페이지를 다시 열어 주세요.'); scheduleRender(); });
+      db.doc('settings/main').onSnapshot(d => {
+        const prevSd = sd();
+        S.settings = normSettings(d.exists ? d.data() : (S.stash && S.stash.settings) || null);
+        if (sd() !== prevSd) S.weekStart = startOfWeek(S.weekStart, sd());
+        scheduleRender();
+      }, () => {});
+      db.collection('weeks').onSnapshot(snap => {
+        const w = {}; snap.docs.forEach(d => { w[d.id] = d.data(); }); S.weeks = w; scheduleRender();
+      }, () => {});
+      scheduleRender();
+    }).catch(() => { S.loaded = true; scheduleRender(); });
+    c.use('user').then(async u => {
+      if (!u) return;
+      try { const ok = await u.can('data.write'); if (ok === false) { S.canWrite = false; scheduleRender(); } } catch (e) { /* 정보 없음: 입력 유지 */ }
+    }).catch(() => {});
+    c.use('sample').then(s => { S.sample = s; scheduleRender(); }).catch(() => {});
+    c.use('downloads').then(d => { S.downloads = d; scheduleRender(); }).catch(() => {});
+  }
+
+  /* ---------- 렌더 ---------- */
+  let rafId = 0;
+  function scheduleRender() { if (rafId) return; rafId = requestAnimationFrame(() => { rafId = 0; render(); }); }
+  function render() {
+    renderBadge();
+    renderWeekNav();
+    if (S.tab === 'week') renderWeek();
+    else if (S.tab === 'report') renderReport();
+    else if (S.tab === 'log') renderLog();
+    else if (S.tab === 'portfolio') renderPortfolio();
+    else if (S.tab === 'setup') renderSetup();
+    updateCaps();
+  }
+  function updateCaps() {
+    const hasX = typeof window.XLSX !== 'undefined';
+    $$('[data-needs]').forEach(el => {
+      const n = el.dataset.needs.split(' ');
+      let ok = true;
+      if (n.includes('xlsx') && !hasX) ok = false;
+      if (n.includes('dl') && !S.downloads) ok = false;
+      if (n.includes('sample') && !S.sample) ok = false;
+      el.hidden = !ok;
+    });
+    if (!S.canWrite) $$('[data-write]').forEach(el => { el.disabled = true; });
+  }
+  function renderBadge() {
+    const b = $('#storeBadge');
+    if (S.mode === 'db') { b.dataset.mode = 'db'; b.textContent = 'Claude 저장소 · 모든 기기에서 동일'; }
+    else if (!S.loaded) { b.dataset.mode = 'connecting'; b.textContent = '저장소 연결 중…'; }
+    else { b.dataset.mode = 'local'; b.textContent = '이 브라우저에만 임시 저장'; }
+  }
+  function renderWeekNav() {
+    const html = `<button class="btn icon-btn" data-act="prevWeek" aria-label="이전 주">‹</button>
+      <div class="weeklabel"><strong>${esc(weekLabel(S.weekStart))}</strong><span>${esc(weekRelative(S.weekStart))}</span></div>
+      <button class="btn icon-btn" data-act="nextWeek" aria-label="다음 주">›</button>
+      ${weekRelative(S.weekStart) === '이번 주' ? '' : '<button class="btn ghost" data-act="thisWeek">이번 주로</button>'}`;
+    $$('[data-weeknav]').forEach(el => { el.innerHTML = html; });
+  }
+  function td(label, inner, cls) {
+    const empty = inner === '' || inner == null;
+    return `<td data-label="${esc(label)}"${cls ? ` class="${cls}"` : ''}${empty ? ' data-empty' : ''}>${empty ? '' : `<div class="cell">${inner}</div>`}</td>`;
+  }
+  function pctCell(p, st) {
+    return `<div class="pct"><span class="num">${p}%</span><span class="pill ${st}">${ST[st]}</span></div><div class="bar ${st}"><i style="--w:${p}%"></i></div>`;
+  }
+
+  function renderWeek() {
+    const ws = S.weekStart, ref = refDate(ws), list = sortEntries(entriesInWeek(ws));
+    let b = '';
+    if (!S.canWrite) b += '<div class="banner warn">보기 전용 권한입니다. 기록을 추가하거나 고칠 수 없습니다.</div>';
+    const ex = S.entries.filter(e => e.example).length;
+    if (ex) b += `<div class="banner"><span><b>예시 데이터 ${ex}건</b>이 들어 있습니다. 화면과 포트폴리오 생성을 둘러보신 뒤 지워 주세요.</span><button class="btn" data-act="delExamples" data-write>예시 모두 삭제</button></div>`;
+    if (S.stash && S.stash.entries.length) b += `<div class="banner"><span>이 브라우저에 임시 저장된 업무 <b>${S.stash.entries.length}건</b>이 있습니다.</span><button class="btn" data-act="migrate" data-write>Claude 저장소로 옮기기</button></div>`;
+    $('#weekBanners').innerHTML = b;
+
+    const cand = carryCandidates();
+    const carryLabel = cand.from ? `${fmtMD(cand.from)} 주 미완료 이월` : '지난주 미완료 이월';
+    $('#weekActions').innerHTML = `<button class="btn" data-act="carry" data-write ${cand.list.length ? '' : 'disabled'}>${esc(carryLabel)} <span class="count">${cand.list.length}</span></button>
+      <button class="btn primary" data-act="addEntry" data-write>+ 업무 추가</button>`;
+
+    const c = countBy(list, ref);
+    $('#weekStats').innerHTML = [['전체', c.total, ''], ['완료', c.done, 'done'], ['진행중', c.doing, ''], ['지연', c.late, 'late'], ['예정', c.plan, '']]
+      .map(([k, v, cls]) => `<span class="stat ${cls}">${k}<b>${v}</b></span>`).join('');
+
+    const box = $('#weekList');
+    if (!S.loaded) { box.innerHTML = '<div class="panel empty"><p>기록을 불러오는 중입니다…</p></div>'; return; }
+    if (!list.length) {
+      const isNow = weekRelative(ws) === '이번 주';
+      box.innerHTML = `<div class="panel empty">
+        <h3>${isNow ? '이번 주 기록이 아직 없습니다' : '이 주간에는 기록이 없습니다'}</h3>
+        <p>업무를 추가하거나 직전 주의 미완료 업무를 이월해 시작하세요. 기존 ‘주요업무현황’ 엑셀이 있다면 설정 · 백업에서 한 번에 가져올 수 있습니다.</p>
+        <div class="inline"><button class="btn primary" data-act="addEntry" data-write>+ 업무 추가</button><button class="btn" data-act="tab" data-tab="setup">엑셀 가져오기</button></div></div>`;
+      return;
+    }
+    const rows = list.map(e => {
+      const st = statusOf(e, ref), p = clampPct(e.pct);
+      const marks = (e.star ? '<span class="mark" title="포트폴리오 대표 업무">★</span>' : (e.impact ? '<span class="mark" title="성과 기록 있음">✓</span>' : ''))
+        + (e.carried ? ' <span class="tag-carry">이월</span>' : '') + (e.example ? ' <span class="pill example">예시</span>' : '');
+      return `<tr data-act="openEntry" data-id="${esc(e.id)}" tabindex="0">
+        ${td('구분', `<span class="cat">${esc(e.category || '-')}</span>`)}
+        ${td('담당자', esc(e.owner))}
+        ${td('업무단위', `<b>${esc(e.unit)}</b>${marks}`, 'unit')}
+        ${td('업무계획', nl(e.plan), 'txt')}
+        ${td('진행상황', nl(e.progressNote), 'txt')}
+        ${td('완료예정일', e.due ? esc(fmtDue(e.due)) : '', 'num')}
+        ${td('진행률', pctCell(p, st))}
+        ${td('비고', nl(e.note), 'txt')}
+      </tr>`;
+    }).join('');
+    box.innerHTML = `<div class="panel gridpanel tablewrap"><table class="grid">
+      <colgroup><col style="width:9%"><col style="width:7%"><col style="width:17%"><col style="width:19%"><col style="width:19%"><col style="width:9%"><col style="width:11%"><col style="width:9%"></colgroup>
+      <thead><tr>${HEAD8.map(h => `<th scope="col">${h}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>`;
+  }
+
+  function renderReport() {
+    const ws = S.weekStart, we = addDays(ws, 6), ref = refDate(ws), st = S.settings;
+    const list = sortEntries(entriesInWeek(ws));
+    const appr = (st.approvals || []).filter(Boolean);
+    const apprHtml = appr.length ? `<table class="approval" aria-label="결재란"><tr><th class="side" rowspan="2">결재</th>${appr.map(a => `<th>${esc(a)}</th>`).join('')}</tr><tr>${appr.map(() => '<td></td>').join('')}</tr></table>` : '';
+    $('#reportHead').innerHTML = `<div class="sheet-head"><div>
+        <p class="eyebrow">${esc(st.dept || '총무부')}</p>
+        <h2>주간업무보고</h2>
+        <dl class="meta"><dt>기간</dt><dd class="num">${esc(fmtDot(ws))} ~ ${esc(fmtDot(we))}</dd><dt>작성자</dt><dd>${esc(st.owner || '—')}</dd></dl>
+      </div>${apprHtml}</div>`;
+    const c = countBy(list, ref);
+    $('#reportSummary').innerHTML = `<span>전체 <b>${c.total}</b>건</span><span>완료 <b>${c.done}</b></span><span>진행중 <b>${c.doing}</b></span><span>지연 <b>${c.late}</b></span><span>예정 <b>${c.plan}</b></span>`;
+    const rows = list.length ? list.map(e => {
+      const s = statusOf(e, ref);
+      return `<tr><td>${esc(e.category)}</td><td>${esc(e.owner)}</td><td>${esc(e.unit)}</td><td>${nl(e.plan)}</td><td>${nl(e.progressNote)}</td>
+        <td class="num">${e.due ? esc(fmtDue(e.due)) : ''}</td><td class="num${s === 'late' ? ' late-cell' : ''}">${clampPct(e.pct)}%${s === 'late' ? '<br>지연' : ''}</td><td>${nl(e.note)}</td></tr>`;
+    }).join('') : `<tr><td colspan="8" class="muted" style="text-align:center;padding:24px">이 주간에 기록된 업무가 없습니다.</td></tr>`;
+    $('#reportTable').innerHTML = `<table class="report"><colgroup><col style="width:9%"><col style="width:7%"><col style="width:15%"><col style="width:20%"><col style="width:20%"><col style="width:9%"><col style="width:8%"><col style="width:12%"></colgroup>
+      <thead><tr>${HEAD8.map(h => `<th scope="col">${h}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`;
+    const next = list.filter(e => clampPct(e.pct) < 100);
+    $('#reportNext').innerHTML = next.length
+      ? `<ul class="nextlist">${next.map(e => `<li>[${esc(e.category)}] ${esc(e.unit)} — ${e.due ? '완료예정 ' + esc(fmtDue(e.due)) + ', ' : ''}현재 ${clampPct(e.pct)}%</li>`).join('')}</ul>`
+      : `<p class="muted small">${list.length ? '이번 주 업무를 모두 완료했습니다.' : '—'}</p>`;
+    const memo = $('#weekMemo');
+    if (document.activeElement !== memo && !memoTimer) memo.value = (S.weeks[ymd(ws)] || {}).memo || '';
+    memo.disabled = !S.canWrite;
+  }
+
+  const logState = () => ({
+    from: $('#logFrom').value, to: $('#logTo').value, cat: $('#logCat').value, status: $('#logStatus').value,
+    q: $('#logQ').value.trim().toLowerCase(), star: $('#logStar').checked, group: $('#logGroup').checked,
+  });
+  function fillCatSelect(sel, withAll) {
+    const v = sel.value;
+    const cats = [...new Set([...S.settings.categories, ...S.entries.map(e => e.category).filter(Boolean)])];
+    sel.innerHTML = (withAll ? '<option value="">전체</option>' : '') + cats.map(c => `<option>${esc(c)}</option>`).join('');
+    if ([...sel.options].some(o => o.value === v)) sel.value = v;
+  }
+  function renderLog() {
+    fillCatSelect($('#logCat'), true);
+    const f = logState(), ref = ymd(today0());
+    let list = S.entries.slice();
+    if (f.from) list = list.filter(e => e.week >= f.from + '-01');
+    if (f.to) list = list.filter(e => e.week <= f.to + '-31');
+    let items = f.group ? groupTasks(list) : list.map(single);
+    const stOf = t => statusOf({ pct: t.pct, due: t.due }, ref);
+    const forSummary = items.filter(t => (!f.star || t.star));
+    if (f.cat) items = items.filter(t => t.category === f.cat);
+    if (f.status) items = items.filter(t => stOf(t) === f.status);
+    if (f.star) items = items.filter(t => t.star);
+    if (f.q) items = items.filter(t => [t.unit, t.plan, t.progressNote, t.impact, t.note, t.lesson, t.evidence].join(' ').toLowerCase().includes(f.q));
+    items.sort((a, b) => (b.last || '').localeCompare(a.last || '') || catIndex(a.category) - catIndex(b.category));
+
+    const cats = [...new Set([...S.settings.categories, ...forSummary.map(t => t.category).filter(Boolean)])];
+    const rows = cats.map(c => {
+      const arr = forSummary.filter(t => t.category === c);
+      if (!arr.length) return '';
+      const done = arr.filter(t => t.pct >= 100).length, imp = arr.filter(t => t.impact).length, rate = Math.round(done / arr.length * 100);
+      return `<div class="catrow"><span class="lbl">${esc(c)}</span><div class="bar done"><i style="--w:${rate}%"></i></div><span class="val">${done}/${arr.length} 완료 · 성과 ${imp}</span></div>`;
+    }).join('');
+    $('#logSummary').innerHTML = `<h3>분야별 현황 <small class="muted small">${f.group ? '업무 단위' : '주간 기록 단위'} · 완료율 막대</small></h3>${rows || '<p class="muted small">조건에 맞는 기록이 없습니다.</p>'}`;
+
+    const box = $('#logList');
+    if (!S.loaded) { box.innerHTML = '<div class="panel empty"><p>기록을 불러오는 중입니다…</p></div>'; return; }
+    if (!items.length) { box.innerHTML = '<div class="panel empty"><h3>표시할 업무가 없습니다</h3><p>기간이나 필터를 바꿔 보세요.</p></div>'; return; }
+    const body = items.map(t => {
+      const s = stOf(t);
+      const period = t.first === t.last ? fmtDue(t.first) : `${fmtDue(t.first)} ~ ${fmtDue(t.last)}`;
+      return `<tr data-act="openEntry" data-id="${esc(t.rep.id)}" tabindex="0">
+        ${td('기간', esc(period) + (t.entries.length > 1 ? `<span class="sub">${t.entries.length}주 기록</span>` : ''), 'num')}
+        ${td('구분', `<span class="cat">${esc(t.category || '-')}</span>`)}
+        ${td('업무단위', `<b>${esc(t.unit)}</b>${t.star ? '<span class="mark">★</span>' : ''}${t.example ? ' <span class="pill example">예시</span>' : ''}`, 'unit')}
+        ${td('진행률', pctCell(t.pct, s))}
+        ${td('역할', esc(t.role))}
+        ${td('정량 성과', t.impact ? nl(t.impact) : '<span class="muted small">미기록</span>', 'txt')}
+        ${td('역량', esc((t.skills || []).join(', ')), 'txt')}
+      </tr>`;
+    }).join('');
+    box.innerHTML = `<div class="panel gridpanel tablewrap"><table class="grid">
+      <colgroup><col style="width:15%"><col style="width:10%"><col style="width:22%"><col style="width:12%"><col style="width:7%"><col style="width:20%"><col style="width:14%"></colgroup>
+      <thead><tr><th>기간</th><th>구분</th><th>업무단위</th><th>진행률</th><th>역할</th><th>정량 성과</th><th>역량</th></tr></thead><tbody>${body}</tbody></table></div>`;
+  }
+
+  /* ---------- 포트폴리오 ---------- */
+  const pfPurpose = () => ($('input[name="pfPurpose"]:checked') || {}).value || 'career';
+  let pfCatsSel = null; // null = 전체
+  function renderPfCats() {
+    const cats = [...new Set([...S.settings.categories, ...S.entries.map(e => e.category).filter(Boolean)])];
+    const box = $('#pfCats');
+    const sig = cats.join('|');
+    if (box.dataset.sig === sig) return;
+    box.dataset.sig = sig;
+    box.innerHTML = cats.map((c, i) => `<label class="chip"><input type="checkbox" id="pfCat-${i}" value="${esc(c)}" ${!pfCatsSel || pfCatsSel.has(c) ? 'checked' : ''}>${esc(c)}</label>`).join('');
+  }
+  function pfTasks() {
+    const from = $('#pfFrom').value, to = $('#pfTo').value, scope = $('#pfScope').value;
+    let list = realOrExamples(S.entries);
+    if (from) list = list.filter(e => e.week >= from + '-01');
+    if (to) list = list.filter(e => e.week <= to + '-31');
+    const checked = $$('#pfCats input:checked').map(i => i.value);
+    const all = $$('#pfCats input').length;
+    if (checked.length < all) list = list.filter(e => checked.includes(e.category));
+    let tasks = groupTasks(list);
+    if (scope === 'done') tasks = tasks.filter(t => t.pct >= 100);
+    if (scope === 'star') tasks = tasks.filter(t => t.star);
+    tasks.sort((a, b) => (b.star - a.star) || catIndex(a.category) - catIndex(b.category) || (a.first || '').localeCompare(b.first || ''));
+    return tasks.slice(0, 200);
+  }
+  function renderPortfolio() {
+    renderPfCats();
+    const tasks = pfTasks();
+    const usingEx = tasks.length && tasks.every(t => t.example);
+    const withImp = tasks.filter(t => t.impact).length;
+    const missing = tasks.filter(t => !t.impact && t.pct >= 100).slice(0, 6);
+    let html = `<div><b>${tasks.length}건</b>의 업무가 선택되었습니다. 그중 정량 성과가 있는 업무 <b>${withImp}건</b>.</div>`;
+    if (usingEx) html += '<div class="muted">지금은 예시 데이터로 만듭니다. 실제 기록이 생기면 실제 기록만 사용합니다.</div>';
+    if (missing.length) html += `<div>성과를 한 줄씩 채우면 문장이 구체적이 됩니다.</div><ul>${missing.map(t => `<li>${esc(t.unit)} <button type="button" class="linkish" data-act="openEntry" data-id="${esc(t.rep.id)}">성과 입력</button></li>`).join('')}</ul>`;
+    if (!tasks.length) html = '<div>조건에 맞는 업무가 없습니다. 기간·범위·분야를 넓혀 보세요.</div>';
+    $('#pfReady').innerHTML = html;
+    $('#btnGen').disabled = !tasks.length || S.pf.running;
+    $('#btnGen').textContent = S.pf.hasOut ? '다시 생성' : '초안 생성';
+    $('#pfNote').textContent = S.sample ? '생성에는 사용자 본인의 Claude 사용량이 쓰입니다. 처음 한 번 허용을 묻습니다.'
+      : '이 화면에서는 Claude 직접 생성을 쓸 수 없습니다. [프롬프트 복사] 후 Claude 대화창에 붙여 넣으세요.';
+  }
+  function buildPrompt() {
+    const p = pfPurpose(), tasks = pfTasks(), st = S.settings;
+    const target = $('#pfTarget').value.trim();
+    const common = `당신은 교회 총무부서 실무자의 경력 문서를 다듬는 편집자입니다.
+아래 [업무 기록]은 작성자가 주간 업무일지에 직접 입력한 사실입니다.
+
+[작성 원칙]
+1. [업무 기록]에 있는 사실만 사용합니다. 기록에 없는 수치·기간·기관명·성과를 만들지 않습니다.
+2. 수치가 들어가면 좋을 자리에 기록된 수치가 없으면 "[수치 확인 필요]"라고 적습니다.
+3. 성도 개인 이름 등 개인정보는 쓰지 않습니다.
+4. 여러 주에 걸친 같은 업무는 하나로 합쳐 기간으로 표현합니다.
+5. 결과는 Markdown으로 씁니다. 제목(##)과 목록을 쓰고, 앞뒤 인사말 없이 문서 본문만 씁니다.
+6. 마지막에 "## 보완이 필요한 기록" 절을 두고, 문서를 더 좋게 만들려면 작성자가 확인하거나 기록해야 할 항목을 3~5개 적습니다.`;
+    const spec = {
+      career: `[문서 종류] 이직용 경력기술서
+[독자] 교회 밖 채용 담당자(기업·기관의 총무·시설·관리 직무)
+[구성]
+## 경력 요약 — 3줄 이내. 담당 분야, 기록 기간, 핵심 강점.
+## 주요 성과 — 분야별로 묶고, 업무마다 STAR(상황·과제·행동·결과)로 2~4줄. 결과에는 정량 성과를 먼저 씁니다. "~을 주도하여 ~을 달성"처럼 성과가 드러나는 문장으로 씁니다.
+## 핵심 역량 — 역량 태그마다 근거가 되는 업무를 연결한 목록.
+## 지원 직무 연결 포인트 — [지원 대상]이 있을 때만. 그 직무와 직접 이어지는 경험 3가지.
+[용어] 교회 내부 용어는 일반 독자가 이해하도록 바꾸고 처음 한 번만 괄호로 원래 용어를 적습니다. 예: 최고 의결기구(당회).`,
+      annual: `[문서 종류] 교회 내부 연간(기간) 업무보고
+[독자] 당회·제직회 등 교회 의결기구
+[문체] 격식 있는 보고체(~하였음, ~함)
+[구성]
+## 개요 — 보고 기간, 담당 분야, 처리한 업무 수(기록 기준).
+## 분야별 주요 실적 — 표: | 분야 | 주요 업무 | 결과 | 비고 |
+## 주요 성과 — 3가지, 각 2줄.
+## 미완료·이월 과제 — 진행률 100% 미만 업무와 현재 진행률.
+## 차기 제안 — 진행상황·비고·배운 점에 근거가 있는 것만. 근거가 없으면 이 절은 생략합니다.`,
+      review: `[문서 종류] 인사평가용 자기평가서
+[독자] 평가자(부서장·담임목사 등)
+[구성]
+## 평가 기간 및 담당 업무
+## 주요 실적 — 업무별로 목표(업무계획) → 실적(진행상황·정량 성과) → 달성도(진행률).
+## 강점과 성장한 역량 — 역량 태그와 배운 점에 근거하여.
+## 아쉬운 점과 개선 계획 — 지연·미완료 업무와 배운 점에 근거하여. 변명이 아니라 개선 중심으로.
+## 다음 기간 목표 — 3가지, 측정할 수 있게.`,
+      apply: `[문서 종류] 자격시험 응시·대학원 등 지원서에 넣을 실무경력 기술
+[구성]
+## 실무경력 요약 — 기간, 분야, 역할.
+## 대표 경험 — 2~3개, 각각 한 문단(5~7문장). 문제 인식 → 행동 → 결과 → 배운 점 순서.
+## 지원 분야와의 연관성 — [지원 대상]이 있을 때만.
+## 증빙 가능 자료 — 증빙 항목에 적힌 자료를 "업무명 – 자료" 형식으로.`,
+    }[p];
+    const lines = tasks.map((t, i) => {
+      const head = `${i + 1}. [${t.category || '기타'}] ${t.unit} | 기록 주간 ${t.first}${t.last !== t.first ? ' ~ ' + t.last : ''} | 진행률 ${t.pct}%`
+        + (t.due ? ` | 완료예정 ${t.due}` : '') + (t.role ? ` | 역할 ${t.role}` : '') + (t.star ? ' | ★대표업무' : '');
+      const f = [['계획', t.plan], ['진행', t.progressNote], ['성과', t.impact], ['역량', (t.skills || []).join(', ')], ['증빙', t.evidence], ['배운 점', t.lesson], ['비고', t.note]]
+        .filter(([, v]) => v && String(v).trim()).map(([k, v]) => `   ${k}: ${clip(oneLine(v), 400)}`);
+      return [head, ...f].join('\n');
+    }).join('\n');
+    const from = $('#pfFrom').value || '처음', to = $('#pfTo').value || '현재';
+    return `${common}
+
+${spec}
+
+[작성자] ${st.owner || '(이름 미입력)'} / ${st.dept || '총무부'}
+[기간] ${from} ~ ${to}
+[지원 대상] ${target || '(없음)'}
+[업무 기록] ${tasks.length}건
+${lines}`;
+  }
+  function sampleErr(c) {
+    return ({
+      cancelled: '중지했습니다.',
+      not_granted: 'Claude 사용이 허용되지 않았습니다. [프롬프트 복사]로 Claude 대화창에서 만들 수 있습니다.',
+      sampling_disabled: '이 계정에서는 Claude 직접 생성을 쓸 수 없습니다. [프롬프트 복사]를 이용하세요.',
+      rate_limited: '요청이 많거나 사용량 한도에 닿았습니다. 잠시 후 다시 시도하세요.',
+      session_expired: '로그인이 만료되었습니다. 다시 로그인한 뒤 시도하세요.',
+      prompt_too_large: '기록이 너무 많습니다. 기간이나 분야를 좁혀 주세요.',
+      refused: 'Claude가 이 요청에 답하지 않았습니다. 범위를 바꿔 다시 시도하세요.',
+      empty_completion: '만들어진 내용이 없습니다. 범위를 좁혀 다시 시도하세요.',
+    })[c] || '생성 중 연결이 끊겼습니다. [다시 생성]을 눌러 주세요.';
+  }
+  async function generate() {
+    if (!S.sample || S.pf.running) return;
+    const tasks = pfTasks(); if (!tasks.length) return;
+    const prompt = buildPrompt();
+    const out = $('#pfOut'), status = $('#pfStatus');
+    const ctl = new AbortController();
+    S.pf.running = true; S.pf.ctl = ctl;
+    $('#btnStop').hidden = false; $('#btnGen').disabled = true;
+    status.textContent = 'Claude가 기록을 읽고 정리하는 중입니다… 보통 10~60초 걸립니다.';
+    const opts = { signal: ctl.signal, modelTier: 'default', onText: ({ text }) => { out.value = text; status.textContent = '작성 중…'; } };
+    if (S.pf.hasOut) opts.cache = false;
+    try {
+      const r = await S.sample(prompt, opts);
+      out.value = r.text; S.pf.hasOut = true; savePfDraft();
+      status.textContent = r.truncated ? '길이 제한으로 끝부분이 잘렸습니다. 기간이나 분야를 좁혀 다시 생성하세요.' : '초안이 완성되었습니다. 자유롭게 고친 뒤 복사하거나 저장하세요.';
+    } catch (e) {
+      const c = e && e.code;
+      if (c === 'refused') out.value = ''; else if (e && e.text) out.value = e.text;
+      status.textContent = sampleErr(c);
+      if (['not_granted', 'sampling_disabled', 'not_declared', 'capability_disabled', 'capability_removed'].includes(c)) S.sample = null;
+    } finally {
+      S.pf.running = false; S.pf.ctl = null; $('#btnStop').hidden = true; scheduleRender();
+    }
+  }
+  function savePfDraft() { try { localStorage.setItem(LS_PF + pfPurpose(), $('#pfOut').value); } catch (e) { /* 무시 */ } }
+  function loadPfDraft() {
+    let v = ''; try { v = localStorage.getItem(LS_PF + pfPurpose()) || ''; } catch (e) { /* 무시 */ }
+    $('#pfOut').value = v; S.pf.hasOut = !!v;
+  }
+
+  /* ---------- 설정 ---------- */
+  function renderSetup() {
+    const s = S.settings;
+    if (!S.settingsDirty) {
+      $('#setDept').value = s.dept || '';
+      $('#setOwner').value = s.owner || '';
+      $('#setWeekStart').value = String(sd());
+      $('#setApprovals').value = (s.approvals || []).join(', ');
+      $('#setCats').value = (s.categories || []).join('\n');
+      $('#setSkills').value = (s.skills || []).join('\n');
+    }
+    $('#storeInfo').innerHTML = S.mode === 'db'
+      ? '기록은 <b>Claude 저장소</b>에 보관됩니다. 이 페이지를 여는 어느 기기에서나 같은 기록이 보입니다.'
+      : '지금은 기록이 <b>이 브라우저에만</b> 임시 저장됩니다. claude.ai에서 이 페이지를 열면 Claude 저장소를 사용합니다.';
+    $('#stashBlock').innerHTML = S.stash && S.stash.entries.length
+      ? `<div class="banner"><span>이 브라우저에 임시 저장된 업무 <b>${S.stash.entries.length}건</b></span><button class="btn" data-act="migrate" data-write>Claude 저장소로 옮기기</button></div>` : '';
+    if (!$('#importWeek').value) $('#importWeek').value = ymd(S.weekStart);
+    const ex = S.entries.filter(e => e.example).length;
+    $('#exampleBlock').innerHTML = ex ? `<h4>예시 데이터</h4><div class="inline"><span class="small">예시 ${ex}건이 들어 있습니다.</span><button class="btn danger" data-act="delExamples" data-write>예시 모두 삭제</button></div>` : '';
+    $('#exampleBlock').hidden = !ex;
+  }
+  const lines = v => [...new Set(String(v || '').split(/\n/).map(x => x.trim()).filter(Boolean))];
+
+  /* ---------- 편집 대화상자 ---------- */
+  const dlg = $('#entryDlg');
+  let delArmed = 0;
+  function setPct(v) {
+    const p = clampPct(v);
+    $('#fPct').value = p; $('#fPctOut').value = p + '%'; $('#fPctOut').textContent = p + '%';
+    $$('#pctQuick button').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.pct === p)));
+    const done = p >= 100;
+    $('#careerHint').hidden = !done;
+    if (done) $('#careerBox').open = true;
+  }
+  function openEntry(id) {
+    const found = id ? S.entries.find(x => x.id === id) : null;
+    if (id && !found) return;
+    S.editing = found ? clone(found) : {
+      id: newId(), taskKey: null, week: ymd(S.weekStart), category: S.settings.categories[0] || '', owner: S.settings.owner || '',
+      unit: '', plan: '', progressNote: '', due: '', pct: 0, note: '', role: '', impact: '', skills: [], evidence: '', lesson: '', star: false, isNew: true,
+    };
+    const e = S.editing;
+    $('#dlgTitle').textContent = found ? '업무 수정' : '업무 추가';
+    const wk = parseYmd(e.week);
+    $('#dlgWeek').textContent = wk ? weekLabel(startOfWeek(wk, sd())) + ' 주간 기록' : '';
+    const cats = [...new Set([...S.settings.categories, e.category].filter(Boolean))];
+    $('#fCategory').innerHTML = cats.map(c => `<option>${esc(c)}</option>`).join('');
+    $('#fCategory').value = e.category || cats[0] || '';
+    $('#fOwner').value = e.owner || '';
+    $('#fUnit').value = e.unit || '';
+    $('#fPlan').value = e.plan || '';
+    $('#fProgress').value = e.progressNote || '';
+    $('#fDue').value = e.due || '';
+    $('#fNote').value = e.note || '';
+    $$('input[name="fRole"]').forEach(r => { r.checked = r.value === e.role; });
+    $('#fImpact').value = e.impact || '';
+    const skills = [...new Set([...S.settings.skills, ...(e.skills || [])])];
+    $('#fSkills').innerHTML = skills.map((s, i) => `<label class="chip"><input type="checkbox" id="fSk-${i}" value="${esc(s)}" ${(e.skills || []).includes(s) ? 'checked' : ''}>${esc(s)}</label>`).join('');
+    $('#fEvidence').value = e.evidence || '';
+    $('#fLesson').value = e.lesson || '';
+    $('#fStar').checked = !!e.star;
+    $('#careerBox').open = !!(e.role || e.impact || (e.skills || []).length || e.evidence || e.lesson || e.star);
+    setPct(e.pct);
+    const del = $('#btnDelete');
+    del.hidden = !found; del.textContent = '삭제'; del.classList.remove('armed'); delArmed = 0;
+    $$('#entryForm input, #entryForm textarea, #entryForm select').forEach(el => { el.disabled = !S.canWrite; });
+    $('#btnSave').disabled = !S.canWrite; del.disabled = !S.canWrite;
+    if (!dlg.open) dlg.showModal();
+    if (!found) setTimeout(() => $('#fUnit').focus(), 30);
+  }
+  $('#fPct').addEventListener('input', e => setPct(e.target.value));
+  $('#pctQuick').addEventListener('click', e => { const b = e.target.closest('button[data-pct]'); if (b) setPct(b.dataset.pct); });
+  $('#entryForm').addEventListener('submit', async ev => {
+    ev.preventDefault();
+    if (!S.canWrite || !S.editing) return;
+    const unit = $('#fUnit').value.trim();
+    if (!unit) { $('#fUnit').focus(); toast('업무단위를 입력해 주세요.'); return; }
+    const e = S.editing, isNew = !!e.isNew;
+    Object.assign(e, {
+      category: $('#fCategory').value, owner: $('#fOwner').value.trim(), unit,
+      plan: $('#fPlan').value.trim(), progressNote: $('#fProgress').value.trim(), due: $('#fDue').value || '',
+      pct: clampPct($('#fPct').value), note: $('#fNote').value.trim(),
+      role: ($('input[name="fRole"]:checked') || {}).value || '', impact: $('#fImpact').value.trim(),
+      skills: $$('#fSkills input:checked').map(i => i.value), evidence: $('#fEvidence').value.trim(),
+      lesson: $('#fLesson').value.trim(), star: $('#fStar').checked,
+    });
+    if (!e.taskKey) e.taskKey = e.id;
+    if (!e.createdAt) e.createdAt = iso();
+    const btn = $('#btnSave'); btn.disabled = true;
+    try { await putEntry(e); dlg.close(); toast(isNew ? '업무를 추가했습니다.' : '저장했습니다.'); }
+    catch (err) { writeErr(err); }
+    finally { btn.disabled = !S.canWrite; }
+  });
+  $('#btnDelete').addEventListener('click', async () => {
+    const btn = $('#btnDelete');
+    if (Date.now() - delArmed > 4000) { delArmed = Date.now(); btn.textContent = '한 번 더 누르면 삭제'; btn.classList.add('armed'); return; }
+    try { await removeEntry(S.editing.id); dlg.close(); toast('삭제했습니다.'); } catch (err) { writeErr(err); }
+  });
+
+  /* ---------- 주간 메모 ---------- */
+  let memoTimer = null, memoKey = null;
+  async function saveMemo() {
+    memoTimer = null;
+    const key = memoKey, val = $('#weekMemo').value;
+    if (!key || ((S.weeks[key] || {}).memo || '') === val) { $('#memoState').textContent = ''; return; }
+    try { await putWeek(key, { memo: val, updatedAt: iso() }); $('#memoState').textContent = '저장됨'; }
+    catch (err) { writeErr(err); }
+  }
+  function flushMemo() { if (memoTimer) { clearTimeout(memoTimer); saveMemo(); } }
+  $('#weekMemo').addEventListener('input', () => {
+    memoKey = ymd(S.weekStart); clearTimeout(memoTimer);
+    $('#memoState').textContent = '입력 중…';
+    memoTimer = setTimeout(saveMemo, 800);
+  });
+  $('#weekMemo').addEventListener('blur', flushMemo);
+
+  /* ---------- 엑셀 · 파일 ---------- */
+  async function saveFile(filename, data) {
+    if (!S.downloads) { toast('이 화면에서는 파일 저장을 쓸 수 없습니다.'); return; }
+    try { await S.downloads.save({ filename, data }); toast('저장했습니다: ' + filename); }
+    catch (e) {
+      const c = e && e.code;
+      if (c === 'declined') return;
+      toast(c === 'rate_limited' ? '잠시 후 다시 눌러 주세요.' : '파일을 저장하지 못했습니다.');
+    }
+  }
+  function xlsxBlob(sheets) {
+    const wb = XLSX.utils.book_new();
+    sheets.forEach(({ name, aoa, cols, merges }) => {
+      const ws = XLSX.utils.aoa_to_sheet(aoa);
+      if (cols) ws['!cols'] = cols.map(w => ({ wch: w }));
+      if (merges) ws['!merges'] = merges;
+      XLSX.utils.book_append_sheet(wb, ws, name);
+    });
+    const buf = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    return new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  }
+  function weekRowsAoa() {
+    const ws = S.weekStart, list = sortEntries(entriesInWeek(ws));
+    return list.map(e => [e.category || '', e.owner || '', e.unit || '', e.plan || '', e.progressNote || '', e.due || '', clampPct(e.pct) + '%', e.note || '']);
+  }
+  function exportWeek() {
+    const ws = S.weekStart, we = addDays(ws, 6), st = S.settings;
+    const memo = (S.weeks[ymd(ws)] || {}).memo || '';
+    const aoa = [
+      [`${st.dept || '총무부'} 주간업무보고`],
+      ['기간', `${fmtDot(ws)} ~ ${fmtDot(we)}`, '', '작성자', st.owner || ''],
+      [],
+      HEAD8,
+      ...weekRowsAoa(),
+    ];
+    if (memo) aoa.push([], ['특이사항 · 건의사항'], [memo]);
+    const blob = xlsxBlob([{ name: '주간보고', aoa, cols: [12, 10, 24, 34, 34, 12, 8, 20], merges: [{ s: { r: 0, c: 0 }, e: { r: 0, c: 7 } }] }]);
+    saveFile(`${st.dept || '총무부'}_주간업무보고_${ymd(ws)}.xlsx`, blob);
+  }
+  const FULL_HEAD = ['주간시작', ...HEAD8, '상태', '역할', '정량성과', '역량태그', '증빙', '배운점', '포트폴리오', '업무키'];
+  function exportAll() {
+    const ref = ymd(today0());
+    const list = S.entries.slice().sort((a, b) => (a.week || '').localeCompare(b.week || '') || catIndex(a.category) - catIndex(b.category));
+    const aoa = [FULL_HEAD, ...list.map(e => [e.week || '', e.category || '', e.owner || '', e.unit || '', e.plan || '', e.progressNote || '', e.due || '', clampPct(e.pct), e.note || '',
+      ST[statusOf(e, ref)], e.role || '', e.impact || '', (e.skills || []).join(', '), e.evidence || '', e.lesson || '', e.star ? 'Y' : '', e.taskKey || e.id])];
+    const blob = xlsxBlob([{ name: '업무기록', aoa, cols: [11, 12, 10, 24, 30, 30, 11, 7, 18, 7, 6, 30, 22, 22, 22, 9, 10] }]);
+    saveFile(`${S.settings.dept || '총무부'}_업무기록_전체_${ymd(today0())}.xlsx`, blob);
+  }
+  function copyText(text) {
+    const fallback = () => { const a = $('#copyArea'); a.value = text; $('#copyDlg').showModal(); a.focus(); a.select(); };
+    try {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) { fallback(); return; }
+      navigator.clipboard.writeText(text).then(() => toast('복사했습니다.'), fallback);
+    } catch (e) { fallback(); }
+  }
+  function copyWeek() {
+    const clean = v => String(v).replace(/[\t\r\n]+/g, ' ');
+    copyText([HEAD8, ...weekRowsAoa()].map(r => r.map(clean).join('\t')).join('\n'));
+  }
+
+  // 가져오기: 머리글 행을 찾아 열을 맞춘다
+  const HEADER_MAP = {
+    '구분': 'category', '담당자': 'owner', '담당': 'owner', '업무단위': 'unit', '업무명': 'unit', '업무계획': 'plan', '계획': 'plan',
+    '진행상황': 'progressNote', '완료예정일': 'due', '완료예정': 'due', '진행률': 'pct', '비고': 'note', '주간시작': 'week', '주차': 'week',
+    '역할': 'role', '정량성과': 'impact', '성과': 'impact', '역량태그': 'skills', '역량': 'skills', '증빙': 'evidence', '배운점': 'lesson',
+    '포트폴리오': 'star', '업무키': 'taskKey',
+  };
+  const normHead = h => String(h || '').replace(/[\s()%★*·]/g, '');
+  function toYmd(v) {
+    if (v instanceof Date && !isNaN(v)) return ymd(new Date(v.getFullYear(), v.getMonth(), v.getDate()));
+    if (typeof v === 'number' && v > 20000 && v < 80000) { const d = new Date(Math.round((v - 25569) * 864e5)); return ymd(new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())); }
+    const s = String(v || '').trim();
+    let m = /(\d{4})\s*[.\-/년]\s*(\d{1,2})\s*[.\-/월]\s*(\d{1,2})/.exec(s);
+    if (m) return `${m[1]}-${pad(+m[2])}-${pad(+m[3])}`;
+    m = /^(\d{1,2})\s*[.\/월]\s*(\d{1,2})/.exec(s);
+    if (m) return `${today0().getFullYear()}-${pad(+m[1])}-${pad(+m[2])}`;
+    return '';
+  }
+  function toPct(v) {
+    if (typeof v === 'number') return clampPct(v <= 1 && v > 0 && !Number.isInteger(v) ? v * 100 : (v === 1 ? 100 : v));
+    const n = parseFloat(String(v || '').replace(/[^\d.]/g, ''));
+    return Number.isFinite(n) ? clampPct(n) : 0;
+  }
+  function parseSheetRows(rows, fallbackWeek) {
+    let hi = -1, map = null;
+    for (let r = 0; r < Math.min(rows.length, 20); r++) {
+      const m = {};
+      rows[r].forEach((h, c) => { const k = HEADER_MAP[normHead(h)]; if (k && !(k in m)) m[k] = c; });
+      if (Object.keys(m).length >= 3 && 'unit' in m) { hi = r; map = m; break; }
+    }
+    if (hi < 0) return { error: '머리글(구분·업무단위 등)이 있는 행을 찾지 못했습니다.' };
+    const out = []; let lastCat = '', lastOwner = '';
+    for (let r = hi + 1; r < rows.length; r++) {
+      const row = rows[r], g = k => (k in map ? row[map[k]] : '');
+      const unit = String(g('unit') || '').trim(), plan = String(g('plan') || '').trim();
+      const cat = String(g('category') || '').trim(), owner = String(g('owner') || '').trim();
+      if (cat) lastCat = cat;
+      if (owner) lastOwner = owner;
+      if (!unit && !plan) continue;
+      const wk = toYmd(g('week'));
+      const id = newId();
+      out.push({
+        id, taskKey: String(g('taskKey') || '').trim() || id,
+        week: wk ? ymd(startOfWeek(parseYmd(wk), sd())) : fallbackWeek,
+        category: cat || lastCat || '기타', owner: owner || lastOwner || S.settings.owner || '',
+        unit: unit || clip(plan, 40), plan, progressNote: String(g('progressNote') || '').trim(),
+        due: toYmd(g('due')), pct: toPct(g('pct')), note: String(g('note') || '').trim(),
+        role: ['주도', '협업', '지원'].includes(String(g('role')).trim()) ? String(g('role')).trim() : '',
+        impact: String(g('impact') || '').trim(),
+        skills: String(g('skills') || '').split(/[,/\n]/).map(x => x.trim()).filter(Boolean),
+        evidence: String(g('evidence') || '').trim(), lesson: String(g('lesson') || '').trim(),
+        star: /^(y|yes|o|예|★|true|1)$/i.test(String(g('star') || '').trim()),
+        createdAt: iso(),
+      });
+    }
+    return { rows: out };
+  }
+  let pendingImport = null;
+  $('#importFile').addEventListener('change', async ev => {
+    const file = ev.target.files && ev.target.files[0]; ev.target.value = '';
+    const box = $('#importResult');
+    if (!file || typeof XLSX === 'undefined') return;
+    try {
+      const buf = await file.arrayBuffer();
+      // 날짜는 일련번호(숫자)로 받아 직접 변환한다. cellDates는 시간대 보정 때문에 하루가 밀릴 수 있다.
+      const wb = XLSX.read(buf, { type: 'array' });
+      const fw = toYmd($('#importWeek').value) || ymd(S.weekStart);
+      const fallbackWeek = ymd(startOfWeek(parseYmd(fw), sd()));
+      let res = { error: '시트를 읽지 못했습니다.' };
+      for (const name of wb.SheetNames) {
+        const rows = XLSX.utils.sheet_to_json(wb.Sheets[name], { header: 1, raw: true, defval: '' });
+        const r = parseSheetRows(rows, fallbackWeek);
+        if (r.rows) { res = r; res.sheet = name; break; }
+        res = r;
+      }
+      if (!res.rows) { box.innerHTML = `<p class="banner warn">${esc(res.error)}</p>`; return; }
+      if (!res.rows.length) { box.innerHTML = '<p class="banner warn">머리글은 찾았지만 가져올 업무 행이 없습니다.</p>'; return; }
+      pendingImport = res.rows;
+      const sampleNames = res.rows.slice(0, 3).map(r => r.unit).join(', ');
+      box.innerHTML = `<div class="banner"><span>‘${esc(res.sheet)}’ 시트에서 <b>${res.rows.length}건</b>을 찾았습니다. (${esc(clip(sampleNames, 60))} …)</span><button class="btn primary" data-act="runImport" data-write>${res.rows.length}건 가져오기</button></div>`;
+    } catch (e) {
+      box.innerHTML = '<p class="banner warn">파일을 읽지 못했습니다. .xlsx 형식으로 저장한 뒤 다시 시도해 주세요. CSV는 UTF-8로 저장해야 한글이 깨지지 않습니다.</p>';
+    }
+  });
+  async function runImport() {
+    if (!pendingImport) return;
+    const rows = pendingImport; pendingImport = null;
+    const box = $('#importResult');
+    box.innerHTML = `<p class="small">가져오는 중… (0/${rows.length})</p>`;
+    let n = 0;
+    try {
+      n = await putMany(rows, async r => { await putEntry(r); n++; if (n % 5 === 0) box.innerHTML = `<p class="small">가져오는 중… (${n}/${rows.length})</p>`; });
+      box.innerHTML = `<p class="banner">${n}건을 가져왔습니다. ‘이번 주 입력’ 또는 ‘누적 기록’에서 확인하세요.</p>`;
+    } catch (err) { writeErr(err); box.innerHTML = `<p class="banner warn">${n}건까지 가져온 뒤 멈췄습니다.</p>`; }
+  }
+  function backupJson() {
+    const data = { app: 'worklog', version: 1, exportedAt: iso(), settings: S.settings, entries: S.entries, weeks: S.weeks };
+    saveFile(`업무일지_백업_${ymd(today0())}.json`, JSON.stringify(data, null, 2));
+  }
+  let pendingRestore = null;
+  $('#restoreFile').addEventListener('change', async ev => {
+    const file = ev.target.files && ev.target.files[0]; ev.target.value = '';
+    const box = $('#restoreResult');
+    if (!file) return;
+    try {
+      const d = JSON.parse(await file.text());
+      if (!d || d.app !== 'worklog' || !Array.isArray(d.entries)) throw new Error('형식');
+      pendingRestore = d;
+      box.innerHTML = `<div class="banner"><span>${esc(String(d.exportedAt || '').slice(0, 10))} 백업 · 업무 <b>${d.entries.length}건</b>. 같은 기록은 백업 내용으로 덮어씁니다.</span><button class="btn primary" data-act="runRestore" data-write>복원 실행</button></div>`;
+    } catch (e) { box.innerHTML = '<p class="banner warn">이 앱에서 저장한 백업 파일(.json)이 아닙니다.</p>'; }
+  });
+  async function runRestore() {
+    const d = pendingRestore; if (!d) return; pendingRestore = null;
+    const box = $('#restoreResult');
+    box.innerHTML = '<p class="small">복원하는 중…</p>';
+    try {
+      if (d.settings) await putSettings(normSettings(d.settings));
+      for (const [k, v] of Object.entries(d.weeks || {})) await putWeek(k, v);
+      const n = await putMany(d.entries.filter(e => e && e.id), e => putEntry(e));
+      box.innerHTML = `<p class="banner">업무 ${n}건을 복원했습니다.</p>`;
+    } catch (err) { writeErr(err); box.innerHTML = '<p class="banner warn">복원 중 멈췄습니다. 다시 시도해 주세요.</p>'; }
+  }
+  async function migrate() {
+    const st = S.stash; if (!st) return;
+    try {
+      const n = await putMany(st.entries, e => putEntry(e));
+      for (const [k, v] of Object.entries(st.weeks || {})) await putWeek(k, v);
+      S.stash = null;
+      try { localStorage.removeItem(LS_KEY); } catch (e) { /* 무시 */ }
+      toast(`${n}건을 Claude 저장소로 옮겼습니다.`); scheduleRender();
+    } catch (err) { writeErr(err); }
+  }
+  async function delExamples() {
+    const ex = S.entries.filter(e => e.example);
+    try { const n = await putMany(ex, e => removeEntry(e.id)); toast(`예시 ${n}건을 삭제했습니다.`); } catch (err) { writeErr(err); }
+  }
+  async function doCarry() {
+    const { list } = carryCandidates(); if (!list.length) return;
+    const wk = ymd(S.weekStart), now = iso();
+    try {
+      const n = await putMany(list, e => { const c = clone(e); Object.assign(c, { id: newId(), week: wk, carried: true, createdAt: now, taskKey: e.taskKey || e.id }); delete c.updatedAt; return putEntry(c); });
+      toast(`${n}건을 이번 주로 이월했습니다. 진행상황을 새로 적어 주세요.`);
+    } catch (err) { writeErr(err); }
+  }
+
+  /* ---------- 탭 · 이벤트 ---------- */
+  function showTab(t, scroll) {
+    if (!TABS.includes(t)) t = 'week';
+    flushMemo();
+    S.tab = t;
+    $$('.tab').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === t)));
+    TABS.forEach(x => { $('#view-' + x).hidden = x !== t; });
+    try { history.replaceState(null, '', '#' + t); } catch (e) { /* 무시 */ }
+    render();
+    if (scroll) window.scrollTo(0, 0);
+  }
+  function moveWeek(n) { flushMemo(); S.weekStart = n === 0 ? startOfWeek(new Date(), sd()) : addDays(S.weekStart, n * 7); render(); }
+
+  const ACT = {
+    tab: b => showTab(b.dataset.tab, true),
+    prevWeek: () => moveWeek(-1), nextWeek: () => moveWeek(1), thisWeek: () => moveWeek(0),
+    addEntry: () => { if (S.canWrite) openEntry(null); },
+    openEntry: b => openEntry(b.dataset.id),
+    closeDlg: () => dlg.close(),
+    closeCopy: () => $('#copyDlg').close(),
+    carry: doCarry, delExamples, migrate,
+    exportWeek, copyWeek, exportAll, backupJson,
+    pickImport: () => $('#importFile').click(), runImport,
+    pickRestore: () => $('#restoreFile').click(), runRestore,
+    genPf: generate,
+    stopPf: () => { if (S.pf.ctl) S.pf.ctl.abort(); },
+    copyPrompt: () => { if (!pfTasks().length) { toast('선택된 업무가 없습니다.'); return; } copyText(buildPrompt()); },
+    copyPf: () => { const v = $('#pfOut').value.trim(); if (!v) { toast('복사할 초안이 없습니다.'); return; } copyText(v); },
+    savePf: () => {
+      const v = $('#pfOut').value.trim(); if (!v) { toast('저장할 초안이 없습니다.'); return; }
+      saveFile(`${PURPOSES[pfPurpose()].file}_${S.settings.owner || '초안'}_${ymd(today0())}.md`, v + '\n');
+    },
+  };
+  document.addEventListener('click', ev => {
+    const b = ev.target.closest('[data-act]');
+    if (!b || b.disabled) return;
+    const fn = ACT[b.dataset.act];
+    if (fn) { ev.preventDefault(); fn(b, ev); }
+  });
+  document.addEventListener('keydown', ev => {
+    if ((ev.key === 'Enter' || ev.key === ' ') && ev.target.matches && ev.target.matches('tr[data-act]')) { ev.preventDefault(); ev.target.click(); }
+  });
+  ['#logFrom', '#logTo', '#logCat', '#logStatus', '#logGroup', '#logStar'].forEach(s => $(s).addEventListener('change', renderLog));
+  $('#logQ').addEventListener('input', renderLog);
+  $('#pfForm').addEventListener('change', ev => {
+    if (ev.target.name === 'pfPurpose') { $('#pfScope').value = PURPOSES[pfPurpose()].scope; loadPfDraft(); $('#pfStatus').textContent = S.pf.hasOut ? '이전에 만든 초안을 불러왔습니다.' : '문서 종류와 기간을 고른 뒤 [초안 생성]을 누르세요.'; }
+    if (ev.target.closest('#pfCats')) pfCatsSel = new Set($$('#pfCats input:checked').map(i => i.value));
+    renderPortfolio();
+  });
+  $('#pfForm').addEventListener('submit', ev => ev.preventDefault());
+  let pfDraftTimer = null;
+  $('#pfOut').addEventListener('input', () => { clearTimeout(pfDraftTimer); pfDraftTimer = setTimeout(savePfDraft, 600); });
+  $('#setForm').addEventListener('input', () => { S.settingsDirty = true; $('#setState').textContent = '저장하지 않은 변경이 있습니다.'; });
+  $('#setForm').addEventListener('submit', async ev => {
+    ev.preventDefault();
+    if (!S.canWrite) return;
+    const next = normSettings({
+      dept: $('#setDept').value.trim() || DEF.dept,
+      owner: $('#setOwner').value.trim(),
+      weekStartDay: Number($('#setWeekStart').value),
+      approvals: $('#setApprovals').value.split(',').map(x => x.trim()).filter(Boolean),
+      categories: lines($('#setCats').value).length ? lines($('#setCats').value) : clone(DEF.categories),
+      skills: lines($('#setSkills').value),
+    });
+    const prevSd = sd();
+    try {
+      await putSettings(next);
+      S.settingsDirty = false; $('#setState').textContent = '저장했습니다.';
+      if (next.weekStartDay !== prevSd) S.weekStart = startOfWeek(S.weekStart, next.weekStartDay);
+      if (S.mode === 'local') scheduleRender();
+    } catch (err) { writeErr(err); }
+  });
+
+  /* ---------- 시작 ---------- */
+  const local = loadLocal();
+  if (local) { S.entries = local.entries; S.weeks = local.weeks; S.settings = normSettings(local.settings); }
+  S.weekStart = startOfWeek(new Date(), sd());
+  S.loaded = !(window.claude && typeof window.claude.use === 'function');
+  const y = today0();
+  $('#pfFrom').value = `${y.getFullYear()}-01`;
+  $('#pfTo').value = `${y.getFullYear()}-${pad(y.getMonth() + 1)}`;
+  loadPfDraft();
+  const h = (location.hash || '').replace('#', '');
+  showTab(TABS.includes(h) ? h : 'week');
+  connect();
+})();
+</script>
