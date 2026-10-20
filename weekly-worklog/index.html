@@ -62,6 +62,14 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 :focus-visible { outline: 2px solid var(--hue); outline-offset: 2px; }
 svg.i { width: 16px; height: 16px; flex: none; }
+[hidden] { display: none !important; }
+@media (max-width: 720px) { .ph-hide { display: none !important; } }
+@media (min-width: 721px) { .ph-only { display: none !important; } }
+button, [data-act], .toggle, .seg label, summary { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+body:has(dialog[open]) { overflow: hidden; }
+#guideBox:empty, #weekCarry:empty { display: none; }
+.seg.full { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); width: 100%; }
+.seg.full > * { justify-content: center; }
 
 .inner { max-width: 1200px; margin: 0 auto; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
 
@@ -72,9 +80,17 @@ svg.i { width: 16px; height: 16px; flex: none; }
 .wordmark svg { width: 22px; height: 14px; color: var(--text); }
 .nav { display: flex; gap: 2px; }
 .nav button { appearance: none; border: 0; background: none; height: 32px; padding: 0 12px; border-radius: var(--radius-control); font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer; white-space: nowrap; }
-.nav button:hover { color: var(--text); }
+@media (hover: hover) { .nav button:hover { color: var(--text); } }
 .nav button[aria-current="page"] { background: var(--active); color: var(--text); }
-.store { margin-left: auto; font-size: 12px; color: var(--muted); white-space: nowrap; }
+.store { margin-left: auto; font-size: 12px; color: var(--muted); white-space: nowrap; appearance: none; background: none; border: 0; padding: 0; min-height: 32px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--control); }
+@media (hover: hover) { .store:hover { color: var(--text); } }
+.bar-help { height: 32px; padding: 0 10px; margin-left: -16px; }
+/* 태블릿 폭: 상단 막대가 넘치지 않게 앱 이름은 결재란 표시만 남긴다 */
+@media (min-width: 721px) and (max-width: 920px) {
+  .bar .inner { gap: 20px; }
+  .wordmark span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .bar-help { margin-left: -8px; }
+}
 
 main.inner { padding-block: 28px 80px; }
 .view { display: grid; gap: var(--gap); min-width: 0; }
@@ -92,22 +108,22 @@ main.inner { padding-block: 28px 80px; }
 
 /* 버튼 */
 .btn { appearance: none; height: 36px; padding: 0 14px; border-radius: var(--radius-control); border: 1px solid transparent; background: var(--active); color: var(--text); font-size: 14px; font-weight: 500; display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; white-space: nowrap; }
-.btn:hover { background: var(--control); }
+@media (hover: hover) { .btn:hover { background: var(--control); } }
 .btn:active { transform: translateY(1px); }
 .btn.primary { background: var(--primary); color: var(--primary-ink); }
-.btn.primary:hover { background: var(--primary-hover); }
+@media (hover: hover) { .btn.primary:hover { background: var(--primary-hover); } }
 .btn.line { background: var(--surface); border-color: var(--control); }
-.btn.line:hover { background: var(--raised); }
+@media (hover: hover) { .btn.line:hover { background: var(--raised); } }
 .btn.quiet { background: transparent; color: var(--muted); }
-.btn.quiet:hover { background: var(--active); color: var(--text); }
+@media (hover: hover) { .btn.quiet:hover { background: var(--active); color: var(--text); } }
 .btn.danger { background: transparent; color: var(--negative); }
-.btn.danger:hover { background: var(--active); }
+@media (hover: hover) { .btn.danger:hover { background: var(--active); } }
 .btn.armed { background: var(--negative); color: var(--surface); }
 .btn.icon { width: 36px; padding: 0; }
 .btn[disabled] { background: var(--active); color: var(--muted); cursor: not-allowed; transform: none; }
 .btn.primary[disabled] { background: var(--control); color: var(--surface); }
 .textbtn { appearance: none; border: 0; background: none; padding: 0; color: var(--text); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--control); cursor: pointer; }
-.textbtn:hover { text-decoration-color: var(--text); }
+@media (hover: hover) { .textbtn:hover { text-decoration-color: var(--text); } }
 
 .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); min-width: 0; }
 .notice { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 10px 16px; border-radius: var(--radius-card); background: var(--notice-bg); border: 1px solid var(--notice-line); color: var(--notice-ink); }
@@ -123,7 +139,7 @@ main.inner { padding-block: 28px 80px; }
 .strip .val { font-size: 24px; line-height: 32px; font-weight: 500; font-variant-numeric: tabular-nums; }
 .strip .val.zero { color: var(--muted); }
 .strip .val.bad { color: var(--negative); }
-.strip button:hover .lbl { color: var(--text); }
+@media (hover: hover) { .strip button:hover .lbl { color: var(--text); } }
 .strip button[aria-pressed="true"] { border-bottom-color: var(--text); }
 .strip button[aria-pressed="true"] .lbl { color: var(--text); }
 
@@ -136,7 +152,8 @@ main.inner { padding-block: 28px 80px; }
 .tbl .name { font-weight: 500; }
 .tbl .sub { display: block; margin-top: 2px; font-size: 12px; line-height: 18px; }
 .tbl tr[data-act] { cursor: pointer; }
-.tbl tr[data-act]:hover .name { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--control); }
+@media (hover: hover) { .tbl tr[data-act]:hover .name { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--control); } }
+.tbl tr[data-act]:active { background: var(--raised); }
 .tbl .dash { color: var(--muted); }
 .tbl .m-only { display: none; }
 .tbl .empty-row td { padding: 28px 16px; color: var(--muted); }
@@ -176,6 +193,8 @@ main.inner { padding-block: 28px 80px; }
 .doc h3 { font-size: 16px; line-height: 24px; font-weight: 700; margin-bottom: 8px; }
 .doc ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 .memo-state { margin-top: 6px; font-size: 12px; color: var(--muted); min-height: 18px; }
+.doc .doc-mlist { display: none; }
+.carryrow { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 0 16px; min-height: 48px; border-bottom: 1px solid var(--rule); }
 
 /* 누적 기록 */
 .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
@@ -203,7 +222,7 @@ main.inner { padding-block: 28px 80px; }
 .choice small { color: var(--muted); font-size: 12px; line-height: 18px; }
 .ready { padding: 12px 14px; border-radius: var(--radius-card); background: var(--raised); display: grid; gap: 6px; }
 .ready ul { margin: 0; padding-left: 18px; display: grid; gap: 2px; }
-.pf-out { display: grid; grid-template-rows: auto 1fr; min-height: 640px; }
+.pf-out { display: grid; grid-template-rows: auto 1fr; min-height: 640px; scroll-margin-top: 64px; }
 .out-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 12px 16px 12px 20px; border-bottom: 1px solid var(--border); }
 .out-head p { flex: 1 1 240px; color: var(--muted); }
 #pfOut { border: 0; border-radius: 0 0 var(--radius-card) var(--radius-card); padding: 20px; min-height: 580px; height: 100%; resize: vertical; font-size: 14px; line-height: 24px; background: var(--surface); }
@@ -242,7 +261,7 @@ input[type="checkbox"] { accent-color: var(--text); width: 16px; height: 16px; }
 .seg label:has(input:focus-visible) { outline: 2px solid var(--hue); outline-offset: -2px; }
 .toggles { display: flex; flex-wrap: wrap; gap: 6px; }
 .toggle { position: relative; display: inline-flex; align-items: center; height: 30px; padding: 0 10px; border: 1px solid var(--control); border-radius: var(--radius-control); font-size: 13px; cursor: pointer; user-select: none; background: var(--surface); color: var(--muted); }
-.toggle:hover { color: var(--text); }
+@media (hover: hover) { .toggle:hover { color: var(--text); } }
 .toggle input { position: absolute; opacity: 0; pointer-events: none; }
 .toggle:has(input:checked) { background: var(--active); border-color: var(--active); color: var(--text); font-weight: 500; }
 .toggle:has(input:focus-visible) { outline: 2px solid var(--hue); outline-offset: 2px; }
@@ -250,7 +269,7 @@ input[type="checkbox"] { accent-color: var(--text); width: 16px; height: 16px; }
 /* 대화상자 */
 dialog { border: 0; border-radius: 12px; padding: 0; width: min(640px, calc(100% - 24px)); max-height: calc(100% - 24px); background: var(--surface); color: var(--text); box-shadow: var(--float-shadow); /* taste-skill-ignore: 떠 있는 대화상자 */ }
 dialog::backdrop { background: var(--scrim); }
-dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24px); }
+dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); }
 .dlg-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 20px 20px 4px 24px; }
 .dlg-head h2 { font-size: 18px; line-height: 26px; font-weight: 700; }
 .dlg-head p { color: var(--muted); font-size: 13px; }
@@ -259,15 +278,42 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
 .spacer { flex: 1; }
 .pct-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; }
 .pct-row output { font-weight: 500; font-variant-numeric: tabular-nums; min-width: 44px; text-align: right; }
-.career { border-top: 1px solid var(--border); padding-top: 4px; }
-.career summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; cursor: pointer; font-weight: 500; }
-.career summary::-webkit-details-marker { display: none; }
-.career summary small { color: var(--muted); font-weight: 400; font-size: 13px; }
-.career summary svg { transition: transform 0.15s; color: var(--muted); }
-.career[open] summary svg { transform: rotate(180deg); }
+.career, .fold { border-top: 1px solid var(--border); padding-top: 4px; }
+.career summary, .fold summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; cursor: pointer; font-weight: 500; }
+.career summary::-webkit-details-marker, .fold summary::-webkit-details-marker { display: none; }
+.career summary small, .fold summary small { color: var(--muted); font-weight: 400; font-size: 13px; }
+.career summary svg, .fold summary svg { transition: transform 0.15s; color: var(--muted); }
+.career[open] summary svg, .fold[open] summary svg { transform: rotate(180deg); }
 .career-body { display: grid; gap: 16px; padding-top: 6px; }
 .hint { color: var(--positive); font-size: 13px; }
 .copy-area { width: 100%; min-height: 260px; font-size: 13px; }
+.seg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+
+/* 진행률 빠른 창: 행의 숫자를 누르면 열린다 */
+.pctbtn { appearance: none; background: none; border: 1px solid transparent; border-radius: var(--radius-control); display: grid; justify-items: end; gap: 6px; width: calc(100% + 16px); min-width: 64px; padding: 6px 8px; margin: -6px -8px; cursor: pointer; font: inherit; color: inherit; }
+@media (hover: hover) { .pctbtn:hover { border-color: var(--control); } }
+#pctDlg { width: min(440px, calc(100% - 24px)); }
+.q-now { font-size: 13px; line-height: 20px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* 처음 쓰는 순서 */
+.guide { padding: 16px 20px; display: grid; gap: 8px; }
+.guide-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.guide-head h2 { font-size: 16px; line-height: 24px; font-weight: 500; }
+.guide-head .textbtn { margin-left: auto; }
+.guide ol { list-style: none; margin: 0; padding: 0; display: grid; }
+.guide li { display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; gap: 12px; align-items: center; min-height: 44px; border-top: 1px solid var(--rule); }
+.guide li.done { color: var(--muted); }
+.gact { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 12px; }
+
+/* 사용법 */
+.help-body h3 { font-size: 15px; line-height: 22px; font-weight: 700; margin-bottom: 6px; }
+.help-body h4 { font-size: 14px; line-height: 22px; font-weight: 500; margin: 4px 0 0; }
+.help-body ol, .help-body ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.help-body p + p { margin-top: 6px; }
+.fold-body { display: grid; gap: 8px; padding: 4px 0 12px; }
+#helpDlg [id^="help"] { scroll-margin-top: 56px; }
+.help-mode { padding: 10px 12px; border-radius: var(--radius-card); background: var(--raised); }
+.help-mode b { font-weight: 500; }
 
 #toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(24px + env(safe-area-inset-bottom, 0px)); background: var(--primary); color: var(--primary-ink); padding: 10px 16px; border-radius: 8px; font-size: 14px; max-width: calc(100% - 32px); z-index: 60; box-shadow: var(--float-shadow); /* taste-skill-ignore: 떠 있는 알림 */ }
 
@@ -281,8 +327,83 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
   main.inner { padding-block: 20px calc(96px + env(safe-area-inset-bottom, 0px)); }
   #toast { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
   .head h1 { font-size: 22px; line-height: 30px; }
-  .strip button { padding: 10px 8px 8px; }
-  .strip .val { font-size: 20px; line-height: 28px; }
+
+  /* 상단 막대: 이번 주에서는 업무 추가, 다른 탭에서는 저장 상태 */
+  .store { min-height: 44px; font-size: 13px; }
+  body[data-tab="week"] .store { display: none; }
+  body:not([data-tab="week"]) .bar-add { display: none; }
+  .bar-add { margin-left: auto; height: 40px; position: relative; }
+  .bar-add::before { content: ""; position: absolute; inset: -4px 0; }
+
+  /* 터치 영역 44px */
+  .btn { height: 44px; }
+  .btn.icon { width: 44px; }
+  .notice .btn { height: 44px; }
+  .seg button, .seg label { height: 44px; padding: 0 14px; }
+  #pctQuick, #duePicks { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); width: 100%; }
+  #pctQuick > *, #duePicks > * { justify-content: center; padding: 0 6px; }
+  input[type="range"] { height: 44px; }
+  .toggle { height: 44px; padding: 0 14px; }
+  .toggles { gap: 8px; }
+  .check { min-height: 44px; }
+  input[type="checkbox"] { width: 20px; height: 20px; }
+  .textbtn { padding-block: 11px; }
+  .career summary, .fold summary { min-height: 48px; }
+  input[type="text"], input[type="date"], input[type="month"], input[type="search"], select, textarea { font-size: 16px; }
+  input[type="text"], input[type="date"], input[type="month"], input[type="search"], select { height: 44px; }
+  #pfOut, .copy-area { font-size: 16px; line-height: 24px; }
+
+  /* 이번 주: 안내 한 줄, 상태는 가로로 미는 칩 */
+  .notice { flex-wrap: nowrap; padding: 8px 8px 8px 12px; gap: 8px; }
+  .notice > span { flex: 1 1 auto; min-width: 0; }
+  .notice .btn { flex: none; }
+  .strip { display: flex; gap: 6px; overflow-x: auto; padding: 8px 12px; scrollbar-width: none; }
+  .strip::-webkit-scrollbar { display: none; }
+  .strip button { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 12px; margin: 0; border: 1px solid var(--control); border-radius: var(--radius-control); }
+  .strip button:first-child { border-left: 1px solid var(--control); }
+  .strip .lbl { font-size: 14px; color: var(--text); }
+  .strip .val { font-size: 14px; line-height: 20px; }
+  .strip button[aria-pressed="true"] { background: var(--active); border-color: var(--active); }
+  .tbl .m-text { -webkit-line-clamp: 1; }
+  .pctbtn { border-color: var(--control); background: var(--surface); min-height: 44px; width: auto; margin: 0; padding: 6px 10px; }
+  .guide { padding: 12px 16px; }
+  .guide li { grid-template-columns: minmax(0, 1fr) auto; }
+  .guide li > :first-child, .guide li.done { display: none; }
+
+  /* 편집 창과 사용법은 전체 화면, 저장은 머리에 */
+  #entryDlg, #helpDlg { width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; border-radius: 0; box-shadow: none; overflow: hidden; }
+  #entryDlg > form, #helpDlg > form { height: 100%; max-height: none; overflow-y: auto; overscroll-behavior: contain; }
+  #entryDlg .dlg-head, #helpDlg .dlg-head { position: sticky; top: 0; z-index: 1; align-items: center; background: var(--surface); border-bottom: 1px solid var(--border); padding: calc(6px + env(safe-area-inset-top, 0px)) 16px 6px 8px; }
+  #entryDlg .dlg-head > div, #helpDlg .dlg-head > div { flex: 1; min-width: 0; }
+  #entryDlg .dlg-head h2, #helpDlg .dlg-head h2 { font-size: 16px; line-height: 24px; }
+  #entryDlg .dlg-head p, #helpDlg .dlg-head p { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #entryDlg .dlg-head .btn.icon, #helpDlg .dlg-head .btn.icon { order: -1; }
+  #entryDlg .dlg-body, #helpDlg .dlg-body { overflow: visible; padding: 16px; }
+  .dlg-foot { padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); }
+  #entryDlg .two { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  #entryDlg[data-mode="edit"] #fldPct { order: -2; }
+  #entryDlg[data-mode="edit"] #fldProgress { order: -1; }
+  #pctDlg { width: 100%; max-width: 100%; margin: auto 0 0; border-radius: 12px 12px 0 0; max-height: 90dvh; }
+  #pctDlg .dlg-body { padding: 12px 16px 16px; }
+  #qPct button { height: 48px; font-size: 15px; }
+
+  /* 주간보고: 표 대신 세로 목록, 특이사항을 위로 */
+  .doc { padding: 20px 16px; }
+  .doc-table, .approval { display: none; }
+  .doc .doc-mlist { display: grid; list-style: none; padding: 0; gap: 0; }
+  .doc-mlist li { display: grid; gap: 2px; padding: 12px 0; border-top: 1px solid var(--rule); }
+  .doc-mlist li:first-child { border-top: 0; padding-top: 0; }
+  .ml-top { display: flex; justify-content: space-between; gap: 12px; font-weight: 500; }
+  .ml-meta { font-size: 13px; line-height: 20px; }
+  #reportHead { order: -2; }
+  .doc-memo { order: -1; }
+  .doc-actions { justify-content: flex-end; }
+
+  /* 포트폴리오 */
+  .pf-out { min-height: 0; }
+  #pfOut { min-height: 60vh; min-height: 60dvh; }
+
+  /* 누적 기록: 검색창과 조건 버튼만, 누르면 펼침 */
   .filters { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); }
   .filters input[type="search"] { width: 100%; grid-column: 1 / -1; order: -1; }
   .filters select { width: 100%; }
@@ -290,7 +411,12 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
   .filters #logStatus { grid-column: 2 / 4; }
   .filters input[type="month"] { width: 100%; }
   .filters .checks { grid-column: 1 / -1; margin-left: 0; }
-  input[type="text"], input[type="date"], input[type="month"], input[type="search"], select, textarea { font-size: 16px; }
+  .filters:not(.open) { display: flex; gap: 8px; }
+  .filters:not(.open) > :not(#logQ):not(.ftoggle):not(.sr-only) { display: none; }
+  .filters:not(.open) #logQ { flex: 1; min-width: 0; order: 0; }
+  .filters.open .ftoggle { grid-column: 1 / -1; order: 9; }
+  #logList { display: flex; flex-direction: column; }
+  #logList .catgrid { order: 2; border-bottom: 0; border-top: 1px solid var(--border); }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } .btn:active { transform: none; } }
 </style>
@@ -300,6 +426,7 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
   <symbol id="i-right" viewBox="0 0 16 16"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-close" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
   <symbol id="i-down" viewBox="0 0 16 16"><path d="M3.5 6 8 10.5 12.5 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5 6.5 11.5 12.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
 <header class="bar">
@@ -315,7 +442,9 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
       <button type="button" data-act="tab" data-tab="portfolio">포트폴리오</button>
       <button type="button" data-act="tab" data-tab="setup">설정</button>
     </nav>
-    <span class="store" id="storeBadge">저장소 연결 중</span>
+    <button type="button" class="store" id="storeBadge" data-act="help" data-sec="helpData">저장소 연결 중</button>
+    <button type="button" class="btn quiet bar-help ph-hide" data-act="help">사용법</button>
+    <button type="button" class="btn primary bar-add ph-only" data-act="addEntry" data-write>업무 추가</button>
   </div>
 </header>
 
@@ -332,8 +461,10 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
         <div class="tools" id="weekActions"></div>
       </div>
     </div>
+    <div id="guideBox"></div>
     <div id="weekNotice"></div>
     <div class="panel">
+      <div id="weekCarry" class="ph-only"></div>
       <div class="strip" id="weekStrip" role="group" aria-label="상태별로 보기"></div>
       <div id="weekList"></div>
     </div>
@@ -348,7 +479,7 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
       </div>
       <div class="tools">
         <div class="weeksw" data-weeknav></div>
-        <div class="tools">
+        <div class="tools ph-hide">
           <button type="button" class="btn" data-act="copyWeek">표 복사</button>
           <button type="button" class="btn primary" data-act="exportWeek" data-needs="xlsx dl">엑셀로 저장</button>
         </div>
@@ -361,11 +492,15 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
         <h3>다음 주 계획</h3>
         <div id="reportNext"></div>
       </section>
-      <section>
+      <section class="doc-memo">
         <h3><label for="weekMemo">특이사항과 건의사항</label></h3>
         <textarea id="weekMemo" rows="4" placeholder="이번 주 특이사항, 결재나 협조가 필요한 일을 적어 주세요."></textarea>
         <p class="memo-state" id="memoState"></p>
       </section>
+      <div class="tools doc-actions ph-only">
+        <button type="button" class="btn" data-act="copyWeek">표 복사</button>
+        <button type="button" class="btn primary" data-act="exportWeek" data-needs="xlsx dl">엑셀로 저장</button>
+      </div>
     </article>
   </section>
 
@@ -394,6 +529,7 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
         <option value="plan">예정</option>
       </select>
       <label class="sr-only" for="logQ">검색</label><input type="search" id="logQ" placeholder="업무명, 성과, 비고 검색">
+      <button type="button" class="btn line ftoggle ph-only" data-act="toggleFilters" aria-expanded="false">조건</button>
       <div class="checks">
         <label class="check"><input type="checkbox" id="logGroup" checked>같은 업무 묶기</label>
         <label class="check"><input type="checkbox" id="logStar">대표 업무만</label>
@@ -461,6 +597,7 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
         <h1>설정</h1>
         <p class="sub" id="storeInfo"></p>
       </div>
+      <div class="tools"><button type="button" class="btn" data-act="help">사용법</button></div>
     </div>
     <div>
       <div id="stashBlock"></div>
@@ -527,20 +664,22 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
     <header class="dlg-head">
       <div><h2 id="dlgTitle">업무 추가</h2><p id="dlgWeek"></p></div>
       <button type="button" class="btn quiet icon" data-act="closeDlg" aria-label="닫기"><svg class="i"><use href="#i-close"/></svg></button>
+      <button type="submit" class="btn primary js-save ph-only" id="btnSaveTop" data-write>저장</button>
     </header>
     <div class="dlg-body">
       <div class="two">
         <label class="field"><span>구분</span><select id="fCategory"></select></label>
-        <label class="field"><span>담당자</span><input type="text" id="fOwner" autocomplete="off"></label>
+        <label class="field"><span>담당자</span><input type="text" id="fOwner" autocomplete="off" enterkeyhint="done"></label>
       </div>
-      <label class="field"><span>업무단위</span><input type="text" id="fUnit" autocomplete="off" placeholder="예: 본당 냉난방기 동절기 점검" required></label>
+      <label class="field"><span>업무단위</span><input type="text" id="fUnit" autocomplete="off" enterkeyhint="done" placeholder="예: 본당 냉난방기 동절기 점검" required></label>
       <label class="field"><span>업무계획</span><textarea id="fPlan" rows="2" placeholder="이번 주에 하려는 일"></textarea></label>
-      <label class="field"><span>진행상황</span><textarea id="fProgress" rows="2" placeholder="실제로 한 일"></textarea></label>
+      <label class="field" id="fldProgress"><span>진행상황</span><textarea id="fProgress" rows="2" placeholder="실제로 한 일"></textarea></label>
       <div class="two">
         <label class="field"><span>완료예정일</span><input type="date" id="fDue"></label>
-        <label class="field"><span>비고</span><input type="text" id="fNote" autocomplete="off"></label>
+        <label class="field"><span>비고</span><input type="text" id="fNote" autocomplete="off" enterkeyhint="done"></label>
       </div>
-      <div class="field">
+      <div class="seg" id="duePicks" role="group" aria-label="완료예정일 빠른 선택"><button type="button" data-due="today" data-write>오늘</button><button type="button" data-due="fri" data-write>이번 주 금</button><button type="button" data-due="nextfri" data-write>다음 주 금</button><button type="button" data-due="none" data-write>지우기</button></div>
+      <div class="field" id="fldPct">
         <span id="pctLabel">진행률</span>
         <div class="pct-row">
           <input type="range" id="fPct" min="0" max="100" step="5" value="0" aria-labelledby="pctLabel">
@@ -566,10 +705,10 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
               <label><input type="radio" name="fRole" id="fRole-sup" value="지원">지원</label>
             </div>
           </div>
-          <label class="field"><span>정량 성과</span><input type="text" id="fImpact" autocomplete="off" placeholder="예: 업체 3곳 비교견적으로 예산보다 120만원(8%) 적게 집행"></label>
+          <label class="field"><span>정량 성과</span><input type="text" id="fImpact" autocomplete="off" enterkeyhint="done" placeholder="예: 업체 3곳 비교견적으로 예산보다 120만원(8%) 적게 집행"></label>
           <div class="field"><span>역량</span><div class="toggles" id="fSkills"></div></div>
-          <label class="field"><span>증빙 자료</span><input type="text" id="fEvidence" autocomplete="off" placeholder="예: 결재문서 2026-112, 견적서 3건, 작업 전후 사진"></label>
-          <label class="field"><span>배운 점</span><input type="text" id="fLesson" autocomplete="off" placeholder="다음에 다르게 할 점 한 줄"></label>
+          <label class="field"><span>증빙 자료</span><input type="text" id="fEvidence" autocomplete="off" enterkeyhint="done" placeholder="예: 결재문서 2026-112, 견적서 3건, 작업 전후 사진"></label>
+          <label class="field"><span>배운 점</span><input type="text" id="fLesson" autocomplete="off" enterkeyhint="done" placeholder="다음에 다르게 할 점 한 줄"></label>
           <label class="check"><input type="checkbox" id="fStar">대표 업무로 표시 (경력기술서에 꼭 넣을 업무)</label>
         </div>
       </details>
@@ -577,8 +716,30 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
     <footer class="dlg-foot">
       <button type="button" class="btn danger" id="btnDelete" data-write>삭제</button>
       <span class="spacer"></span>
-      <button type="button" class="btn" data-act="closeDlg">취소</button>
-      <button type="submit" class="btn primary" id="btnSave" data-write>저장</button>
+      <button type="button" class="btn ph-hide" data-act="closeDlg">취소</button>
+      <button type="submit" class="btn primary js-save ph-hide" id="btnSave" data-write>저장</button>
+    </footer>
+  </form>
+</dialog>
+
+<dialog id="pctDlg" aria-labelledby="qTitle">
+  <form id="pctForm" method="dialog" novalidate>
+    <header class="dlg-head">
+      <div><h2 id="qTitle"></h2><p id="qMeta"></p></div>
+      <button type="button" class="btn quiet icon" data-act="closeQuick" aria-label="닫기"><svg class="i"><use href="#i-close"/></svg></button>
+    </header>
+    <div class="dlg-body">
+      <div class="field"><span id="qPctLabel">진행률</span>
+        <div class="seg full" id="qPct" role="group" aria-labelledby="qPctLabel"><button type="button" data-qpct="0">0%</button><button type="button" data-qpct="25">25%</button><button type="button" data-qpct="50">50%</button><button type="button" data-qpct="75">75%</button><button type="button" data-qpct="100">완료</button></div>
+      </div>
+      <label class="field"><span>이번에 한 일<em>선택, 진행상황 끝에 한 줄로 붙습니다</em></span><input type="text" id="qNote" autocomplete="off" enterkeyhint="done" placeholder="예: 견적 3건 접수"></label>
+      <p class="muted q-now" id="qNow"></p>
+      <label class="field" id="qImpactField" hidden><span>정량 성과<em>경력기술서와 연간보고에 그대로 쓰입니다</em></span><input type="text" id="qImpact" autocomplete="off" enterkeyhint="done" placeholder="예: 소화기 48개 전수 점검, 불량 5개 교체"></label>
+    </div>
+    <footer class="dlg-foot">
+      <button type="button" class="textbtn" data-act="quickFull">전체 항목 고치기</button>
+      <span class="spacer"></span>
+      <button type="submit" class="btn primary" id="qSave" data-write>저장</button>
     </footer>
   </form>
 </dialog>
@@ -586,11 +747,106 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
 <dialog id="copyDlg" aria-labelledby="copyTitle">
   <form method="dialog">
     <header class="dlg-head">
-      <div><h2 id="copyTitle">직접 복사하기</h2><p>이 화면에서는 자동 복사가 막혀 있습니다. 선택된 내용을 Ctrl+C(맥은 ⌘+C)로 복사하세요.</p></div>
+      <div><h2 id="copyTitle">직접 복사하기</h2><p id="copyHint">이 화면에서는 자동 복사가 막혀 있습니다. 선택된 내용을 Ctrl+C(맥은 ⌘+C)로 복사하세요.</p></div>
       <button type="button" class="btn quiet icon" data-act="closeCopy" aria-label="닫기"><svg class="i"><use href="#i-close"/></svg></button>
     </header>
     <div class="dlg-body"><label for="copyArea" class="sr-only">복사할 내용</label><textarea id="copyArea" class="copy-area" readonly></textarea></div>
     <footer class="dlg-foot"><span class="spacer"></span><button type="button" class="btn primary" data-act="closeCopy">닫기</button></footer>
+  </form>
+</dialog>
+
+<dialog id="helpDlg" aria-labelledby="helpTitle">
+  <form method="dialog">
+    <header class="dlg-head">
+      <div><h2 id="helpTitle">사용법</h2><p>휴대폰과 다른 컴퓨터에서 같은 기록을 쓰는 방법</p></div>
+      <button type="button" class="btn quiet icon" data-act="closeHelp" aria-label="닫기"><svg class="i"><use href="#i-close"/></svg></button>
+    </header>
+    <div class="dlg-body help-body">
+      <section id="helpData">
+        <h3>기록이 저장되는 곳</h3>
+        <p class="help-mode" id="helpMode">저장소에 연결하는 중입니다.</p>
+        <p class="muted">이 문장이 지금 쓰는 기기의 상태입니다. 휴대폰이나 다른 컴퓨터에서 열었을 때도 여기를 먼저 확인하세요.</p>
+      </section>
+      <section id="helpWeek">
+        <h3>매주 쓰는 순서</h3>
+        <ol>
+          <li>주 시작: 지난주 미완료 업무를 가져오고 새 업무를 추가합니다.</li>
+          <li>주중: 진행률 숫자를 눌러 바꾸고, 한 일을 한 줄 덧붙입니다.</li>
+          <li>끝낸 업무: 완료를 누르고 정량 성과를 한 줄 적습니다.</li>
+          <li>주말: 주간보고에서 특이사항을 적고 엑셀로 저장합니다.</li>
+        </ol>
+      </section>
+      <section id="helpWhat">
+        <h3>화면 다섯 개</h3>
+        <ul>
+          <li>이번 주: 이번 주 업무를 적고 진행률을 바로 고칩니다.</li>
+          <li>주간보고: 기존 8열 양식 그대로 보고서를 만들고 엑셀로 저장합니다.</li>
+          <li>누적 기록: 여러 주에 걸친 같은 업무를 묶어 봅니다.</li>
+          <li>포트폴리오: 쌓인 기록으로 경력기술서 같은 문서 초안을 만듭니다.</li>
+          <li>설정: 이름, 결재란, 구분을 바꾸고 엑셀을 가져오거나 백업합니다.</li>
+        </ul>
+      </section>
+      <details class="fold" id="helpPhone">
+        <summary><span>휴대폰에서 열기</span><svg class="i"><use href="#i-down"/></svg></summary>
+        <div class="fold-body">
+          <h4>Claude 앱</h4>
+          <ol>
+            <li>휴대폰에서 claude.ai/mobile 을 열면 맞는 앱 스토어로 갑니다. iPhone은 iOS 18 이상, Android는 8.0 이상이 필요합니다.</li>
+            <li>컴퓨터에서 쓰던 방법(Google 또는 이메일)으로 같은 계정에 로그인합니다.</li>
+            <li>메뉴의 아티팩트(Artifacts)에서 ‘총무부 주간업무일지’를 엽니다.</li>
+            <li>사용법의 맨 위 문장이 ‘같은 기록’이라고 말하는지 확인합니다. 아니라면 아래 브라우저 방법을 쓰세요.</li>
+          </ol>
+          <h4>휴대폰 브라우저</h4>
+          <ol>
+            <li>아래 ‘앱 주소 복사’로 주소를 복사해 메신저나 메일로 나에게 보냅니다.</li>
+            <li>휴대폰 브라우저에서 claude.ai에 로그인한 뒤 그 주소를 엽니다.</li>
+            <li>iPhone Safari: 공유 버튼, ‘홈 화면에 추가’, ‘추가’ 순서로 누릅니다. 목록에 없으면 맨 아래 ‘동작 편집’에서 넣습니다.</li>
+            <li>아이콘으로 열었을 때 다시 로그인하라고 나오면, 아이콘을 지우고 다시 추가하면서 ‘웹 앱으로 열기’를 끄세요. 그러면 Safari에서 열립니다.</li>
+            <li>Android Chrome: 주소창 오른쪽 점 세 개, ‘홈 화면에 추가’(버전에 따라 ‘설치 및 바로가기 만들기’), ‘바로가기 만들기’, ‘추가’ 순서로 누릅니다. 이 바로가기는 Chrome에서 열립니다.</li>
+          </ol>
+        </div>
+      </details>
+      <details class="fold" id="helpPc">
+        <summary><span>다른 컴퓨터에서 열기</span><svg class="i"><use href="#i-down"/></svg></summary>
+        <div class="fold-body">
+          <ol>
+            <li>브라우저에서 claude.ai에 로그인하고 앱 주소를 엽니다.</li>
+            <li>주소창 오른쪽의 즐겨찾기(북마크) 버튼을 눌러 둡니다. Edge에서는 Ctrl+D도 됩니다.</li>
+            <li>주소를 잊었으면 claude.ai 왼쪽 메뉴의 아티팩트나 claude.ai/code/artifacts 에서 찾습니다.</li>
+            <li>Claude 데스크톱 앱에서는 아티팩트를 고정해 두고 앱 안에서 바로 열 수 있습니다.</li>
+            <li>교회나 회사 네트워크에서 앱 화면이 비어 보이면, 관리자에게 claude.ai와 claudeusercontent.com 접속 허용을 요청합니다.</li>
+          </ol>
+        </div>
+      </details>
+      <details class="fold" id="helpShared">
+        <summary><span>여러 사람이 쓰는 컴퓨터에서</span><svg class="i"><use href="#i-down"/></svg></summary>
+        <div class="fold-body">
+          <ol>
+            <li>Chrome은 시크릿 창, Edge는 InPrivate 창을 엽니다. 단축키는 둘 다 Ctrl+Shift+N입니다.</li>
+            <li>로그인은 이메일로 하고, 메일의 로그인 링크를 휴대폰에서 엽니다. 휴대폰에 나온 인증 코드를 컴퓨터에 입력하면 공용 컴퓨터에 메일 비밀번호를 넣지 않아도 됩니다.</li>
+            <li>비밀번호를 저장하겠냐고 물으면 저장하지 않습니다.</li>
+            <li>다 쓰면 Claude에서 로그아웃한 뒤 창을 모두 닫습니다. 로그아웃하지 않으면 로그인이 28일 동안 남을 수 있고, 그동안 쓰면 계속 연장됩니다.</li>
+            <li>로그아웃을 잊었다면 다른 기기의 claude.ai에서 설정, 계정, 활성 세션(Active sessions)으로 들어가 그 컴퓨터를 끊습니다.</li>
+            <li>엑셀로 저장한 파일은 창을 닫아도 컴퓨터에 남으니, 옮긴 뒤 지웁니다.</li>
+          </ol>
+        </div>
+      </details>
+      <section id="helpCare">
+        <h3>알아 둘 점</h3>
+        <ul>
+          <li>포트폴리오 초안은 본인 Claude 사용량을 쓰고, 처음 한 번 허용 여부를 묻습니다. 초안 만들기 버튼이 없으면 요청문 복사를 쓰세요.</li>
+          <li>성도 개인정보와 헌금 개별 내역은 적지 않습니다.</li>
+          <li>한 달에 한 번 설정에서 백업 파일을 받아 두세요.</li>
+          <li>공유 설정은 claude.ai 웹이나 데스크톱 앱에서만 바꿀 수 있습니다.</li>
+        </ul>
+      </section>
+    </div>
+    <footer class="dlg-foot">
+      <button type="button" class="textbtn" data-act="guideReset">처음 쓰는 순서 다시 보기</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn" data-act="copyAppUrl">앱 주소 복사</button>
+      <button type="button" class="btn primary ph-hide" data-act="closeHelp">닫기</button>
+    </footer>
   </form>
 </dialog>
 
@@ -623,6 +879,11 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
     apply: { scope: 'done', file: '실무경력기술' },
   };
   const icon = id => `<svg class="i" aria-hidden="true"><use href="#i-${id}"/></svg>`;
+  const APP_URL = 'https://claude.ai/artifact/EhN5qGHDUxik8EUEdZ69Ey';
+  const LS_GUIDE = 'worklog.guide.v1', LS_HELP = 'worklog.help.v1';
+  let guideMem = false, helpMem = false; // localStorage가 막힌 브라우저용 기억
+  const lsGet = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  const lsSet = (k, v) => { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { /* 무시 */ } };
 
   /* ---------- 상태 ---------- */
   const S = {
@@ -822,6 +1083,7 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
     else if (S.tab === 'log') renderLog();
     else if (S.tab === 'portfolio') renderPortfolio();
     else if (S.tab === 'setup') renderSetup();
+    if ($('#helpDlg').open) renderHelpMode();
     updateCaps();
   }
   function updateCaps() {
@@ -838,9 +1100,39 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
   }
   function renderBadge() {
     const b = $('#storeBadge');
-    if (S.mode === 'db') b.textContent = '모든 기기에서 같은 기록';
+    if (S.mode === 'db') b.textContent = 'Claude 저장소에 저장 중';
     else if (!S.loaded) b.textContent = '저장소 연결 중';
     else b.textContent = '이 브라우저에만 저장 중';
+  }
+  function renderHelpMode() {
+    $('#helpMode').innerHTML = S.mode === 'db'
+      ? '<b>지금 이 기기는 Claude 저장소를 쓰고 있습니다.</b> 같은 Claude 계정으로 로그인했고 이 문장이 보이는 기기끼리는 같은 기록이 보입니다. 이 앱은 직접 공유하기 전까지 본인만 볼 수 있습니다.'
+      : S.loaded
+        ? '<b>지금 이 브라우저에만 저장되고 있습니다.</b> 여기서 적은 기록은 다른 기기에 나타나지 않습니다. claude.ai에 로그인한 상태로 앱 주소를 열어 주세요.'
+        : '저장소에 연결하는 중입니다.';
+  }
+  function guideSteps() {
+    const ex = S.entries.some(e => e.example), real = S.entries.some(e => !e.example);
+    return [
+      { done: !!(S.settings.owner || '').trim(), text: '설정에서 담당자 이름과 결재란을 저장합니다.',
+        act: '<button type="button" class="textbtn" data-act="tab" data-tab="setup">설정 열기</button>' },
+      { done: !ex, text: '예시 업무를 둘러본 뒤 지웁니다.',
+        act: '<button type="button" class="textbtn" data-act="delExamples" data-write>예시 지우기</button>' },
+      { done: real, text: '이번 주 업무를 적거나 기존 엑셀을 가져옵니다.',
+        act: '<button type="button" class="textbtn" data-act="addEntry" data-write>업무 추가</button><button type="button" class="textbtn ph-hide" data-act="tab" data-tab="setup">엑셀 가져오기</button>' },
+      { done: helpMem || !!lsGet(LS_HELP), text: '휴대폰과 다른 컴퓨터에서 여는 법을 봅니다.',
+        act: '<button type="button" class="textbtn" data-act="help" data-sec="helpPhone">방법 보기</button>' },
+    ];
+  }
+  function renderGuide() {
+    const box = $('#guideBox');
+    const steps = guideSteps(), n = steps.filter(s => s.done).length;
+    const show = S.loaded && S.canWrite && !(guideMem || lsGet(LS_GUIDE) === 'hidden') && n < steps.length;
+    box.innerHTML = show ? `<div class="panel guide">
+        <div class="guide-head"><h2>처음 쓰는 순서</h2><span class="muted">${steps.length}단계 중 ${n}단계 완료</span><button type="button" class="textbtn" data-act="guideClose">닫기</button></div>
+        <ol>${steps.map(s => `<li${s.done ? ' class="done"' : ''}>${s.done ? icon('check') : '<span></span>'}<span>${s.text}</span><span class="gact">${s.done ? '' : s.act}</span></li>`).join('')}</ol>
+      </div>` : '';
+    return show;
   }
   function renderWeekNav() {
     const ws = S.weekStart, we = addDays(ws, 6);
@@ -873,17 +1165,22 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
       ? `${rangeKo(ws)}, 업무 <b>${c.total}건</b> 중 <b>${c.done}건</b> 완료.${weekFinding(list, ref)}`
       : `${rangeKo(ws)}. 아직 적은 업무가 없습니다.`;
 
+    const guided = renderGuide();
     let n = '';
+    if (S.loaded && S.mode === 'local') n += '<div class="notice"><span>이 브라우저에만 저장되고 있습니다. 다른 기기와 같은 기록을 쓰려면 claude.ai에 로그인한 상태로 여세요.</span><button type="button" class="btn line" data-act="help" data-sec="helpData">방법 보기</button></div>';
     if (!S.canWrite) n += '<div class="notice">보기 전용입니다. 기록을 추가하거나 고칠 수 없습니다.</div>';
     const ex = S.entries.filter(e => e.example).length;
-    if (ex) n += `<div class="notice"><span>지금 보이는 업무 중 예시 ${ex}건이 섞여 있습니다. 둘러보신 뒤 지워 주세요.</span><button type="button" class="btn line" data-act="delExamples" data-write>예시 지우기</button></div>`;
+    if (ex && !guided) n += `<div class="notice"><span>예시 업무 ${ex}건이 섞여 있습니다. 둘러본 뒤 지워 주세요.</span><button type="button" class="btn line" data-act="delExamples" data-write>예시 지우기</button></div>`;
     if (S.stash && S.stash.entries.length) n += `<div class="notice"><span>이 브라우저에 따로 저장된 업무 ${S.stash.entries.length}건이 있습니다.</span><button type="button" class="btn line" data-act="migrate" data-write>저장소로 옮기기</button></div>`;
     $('#weekNotice').innerHTML = n;
 
     const cand = carryCandidates();
+    const carryLabel = cand.list.length ? (cand.from && weekDiff(cand.from) === weekDiff(ws) - 1 ? '지난주' : esc(fmtMD(cand.from) + ' 주')) : '';
     const carry = cand.list.length
-      ? `<button type="button" class="btn" data-act="carry" data-write>${cand.from && weekDiff(cand.from) === weekDiff(ws) - 1 ? '지난주' : esc(fmtMD(cand.from) + ' 주')} 미완료 ${cand.list.length}건 가져오기</button>` : '';
-    $('#weekActions').innerHTML = `${carry}<button type="button" class="btn primary" data-act="addEntry" data-write>업무 추가</button>`;
+      ? `<button type="button" class="btn ph-hide" data-act="carry" data-write>${carryLabel} 미완료 ${cand.list.length}건 가져오기</button>` : '';
+    $('#weekActions').innerHTML = `${carry}<button type="button" class="btn primary ph-hide" data-act="addEntry" data-write>업무 추가</button>`;
+    $('#weekCarry').innerHTML = cand.list.length
+      ? `<div class="carryrow"><span>${carryLabel} 미완료 ${cand.list.length}건</span><button type="button" class="textbtn" data-act="carry" data-write>이번 주로 가져오기</button></div>` : '';
 
     const items = [['all', '전체', c.total], ['doing', '진행중', c.doing], ['late', '지연', c.late], ['done', '완료', c.done], ['plan', '예정', c.plan]];
     $('#weekStrip').innerHTML = items.map(([k, l, v]) => `<button type="button" data-act="weekFilter" data-f="${k}" aria-pressed="${S.weekFilter === k}">
@@ -903,15 +1200,20 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
         const flags = [e.carried ? '지난주에서 이어짐' : '', e.star ? '대표 업무' : ''].filter(Boolean).join(', ');
         const dueTxt = e.due ? fmtDue(e.due) : '';
         const stLine = st === 'late' ? '<span class="sub late">지연</span>' : (st === 'done' ? '<span class="sub muted">완료</span>' : '');
-        const mMeta = [esc(e.category), dueTxt ? esc(dueTxt) + '까지' : ''].filter(Boolean).join(', ') + (st === 'late' ? ', <span class="late">지연</span>' : '');
+        const mMeta = [esc(e.category), dueTxt ? esc(dueTxt) + '까지' : '', st === 'late' ? '<span class="late">지연</span>' : '',
+          e.carried ? '지난주에서 이어짐' : '', e.star ? '대표 업무' : ''].filter(Boolean).join(', ');
         const mText = e.progressNote || e.plan;
+        const bar = `<span class="num">${p}%</span><span class="track"><i style="--w:${p}%"></i></span>`;
+        const pctCell = S.canWrite
+          ? `<button type="button" class="pctbtn" data-act="quickPct" data-id="${esc(e.id)}" aria-label="진행률 ${p}%, 바꾸기">${bar}</button>`
+          : `<div class="prog">${bar}</div>`;
         return `<tr data-act="openEntry" data-id="${esc(e.id)}" tabindex="0">
           <td class="m-hide">${esc(e.category || '')}<span class="sub muted">${esc(e.owner || '')}</span></td>
-          <td><span class="name">${esc(e.unit)}</span>${flags ? `<span class="sub muted">${esc(flags)}</span>` : ''}<span class="sub muted m-only">${mMeta}</span>${mText ? `<span class="m-only m-text">${esc(mText)}</span>` : ''}</td>
+          <td><span class="name">${esc(e.unit)}</span>${flags ? `<span class="sub muted m-hide">${esc(flags)}</span>` : ''}<span class="sub muted m-only">${mMeta}</span>${mText ? `<span class="m-only m-text">${esc(oneLine(mText))}</span>` : ''}</td>
           <td class="m-hide">${dash(e.plan, nl)}</td>
           <td class="m-hide">${dash(e.progressNote, nl)}</td>
           <td class="m-hide r num">${dash(dueTxt, esc)}${stLine}</td>
-          <td class="r c-pct"><div class="prog"><span class="num">${p}%</span><span class="track"><i style="--w:${p}%"></i></span></div></td>
+          <td class="r c-pct">${pctCell}</td>
           <td class="m-hide muted">${nl(e.note)}</td>
         </tr>`;
       }).join('');
@@ -938,8 +1240,17 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
       return `<tr><td>${esc(e.category)}</td><td>${esc(e.owner)}</td><td>${esc(e.unit)}</td><td>${nl(e.plan)}</td><td>${nl(e.progressNote)}</td>
         <td class="c num">${e.due ? esc(fmtDue(e.due)) : ''}</td><td class="c num${s === 'late' ? ' late' : ''}">${clampPct(e.pct)}%${s === 'late' ? '<br>지연' : ''}</td><td>${nl(e.note)}</td></tr>`;
     }).join('') : `<tr><td colspan="8" class="c muted" style="padding:24px">이 주에 적은 업무가 없습니다.</td></tr>`;
+    // 휴대폰에서는 같은 8개 항목을 세로 목록으로 보여 준다
+    const mlist = list.length ? list.map(e => {
+      const s = statusOf(e, ref);
+      const meta = [esc(e.category), e.due ? esc(fmtDue(e.due)) + '까지' : '', esc(e.owner)].filter(Boolean).join(', ') + (s === 'late' ? ', <span class="late">지연</span>' : '');
+      const more = [['계획', e.plan], ['진행', e.progressNote], ['비고', e.note]].filter(([, v]) => v && String(v).trim())
+        .map(([k, v]) => `<p><span class="muted">${k}</span> ${nl(v)}</p>`).join('');
+      return `<li><div class="ml-top"><span>${esc(e.unit)}</span><span class="num${s === 'late' ? ' late' : ''}">${clampPct(e.pct)}%</span></div><p class="ml-meta muted">${meta}</p>${more}</li>`;
+    }).join('') : '<li class="muted">이 주에 적은 업무가 없습니다.</li>';
     $('#reportTable').innerHTML = `<table class="doc-table"><colgroup><col style="width:9%"><col style="width:7%"><col style="width:15%"><col style="width:20%"><col style="width:20%"><col style="width:10%"><col style="width:7%"><col style="width:12%"></colgroup>
-      <thead><tr>${HEAD8.map(h => `<th scope="col">${h}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`;
+      <thead><tr>${HEAD8.map(h => `<th scope="col">${h}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>
+      <ul class="doc-mlist">${mlist}</ul>`;
     const next = list.filter(e => clampPct(e.pct) < 100);
     $('#reportNext').innerHTML = next.length
       ? `<ul>${next.map(e => `<li>${esc(e.unit)} (${esc(e.category)}). ${e.due ? '완료예정 ' + esc(fmtDue(e.due)) + ', ' : ''}현재 ${clampPct(e.pct)}%</li>`).join('')}</ul>`
@@ -968,6 +1279,8 @@ dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 24
       $('#logTo').value = `${t.getFullYear()}-${pad(t.getMonth() + 1)}`;
     }
     const f = logState(), ref = ymd(today0());
+    const nf = [logTouched, f.cat, f.status, f.star, !f.group].filter(Boolean).length;
+    $('.ftoggle').textContent = $('.filters').classList.contains('open') ? '조건 접기' : nf ? `조건 ${nf}개` : '조건';
     let list = S.entries.slice();
     if (f.from) list = list.filter(e => e.week >= f.from + '-01');
     if (f.to) list = list.filter(e => e.week <= f.to + '-31');
@@ -1142,6 +1455,7 @@ ${lines}`;
     S.pf.running = true; S.pf.ctl = ctl;
     $('#btnStop').hidden = false; $('#btnGen').disabled = true;
     status.textContent = 'Claude가 기록을 읽고 있습니다. 보통 10초에서 1분 걸립니다.';
+    if (matchMedia('(max-width: 900px)').matches) $('.pf-out').scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     const opts = { signal: ctl.signal, modelTier: 'default', onText: ({ text }) => { out.value = text; status.textContent = '쓰는 중입니다.'; } };
     if (S.pf.hasOut) opts.cache = false;
     try {
@@ -1175,7 +1489,7 @@ ${lines}`;
       $('#setSkills').value = (s.skills || []).join('\n');
     }
     $('#storeInfo').textContent = S.mode === 'db'
-      ? '기록은 Claude 저장소에 있어 휴대폰과 컴퓨터 어디서 열어도 같습니다. 이 페이지는 본인만 볼 수 있습니다.'
+      ? '기록은 Claude 저장소에 있어, 같은 계정으로 이 앱을 연 기기에서는 같은 기록이 보입니다. 이 페이지는 본인만 볼 수 있습니다.'
       : '지금은 기록이 이 브라우저에만 저장됩니다. claude.ai에서 열면 Claude 저장소를 씁니다.';
     $('#stashBlock').innerHTML = S.stash && S.stash.entries.length
       ? `<div class="notice" style="margin-bottom:12px"><span>이 브라우저에 따로 저장된 업무 ${S.stash.entries.length}건이 있습니다.</span><button type="button" class="btn line" data-act="migrate" data-write>저장소로 옮기기</button></div>` : '';
@@ -1207,8 +1521,10 @@ ${lines}`;
     };
     const e = S.editing;
     $('#dlgTitle').textContent = found ? '업무 수정' : '업무 추가';
+    dlg.dataset.mode = found ? 'edit' : 'new';
     const wk = parseYmd(e.week);
-    $('#dlgWeek').textContent = wk ? `${rangeKo(startOfWeek(wk, sd()))}의 기록` : '';
+    const range = wk ? `${rangeKo(startOfWeek(wk, sd()))}의 기록` : '';
+    $('#dlgWeek').textContent = found ? [e.unit, range].filter(Boolean).join(', ') : range;
     const cats = [...new Set([...S.settings.categories, e.category].filter(Boolean))];
     $('#fCategory').innerHTML = cats.map(c => `<option>${esc(c)}</option>`).join('');
     $('#fCategory').value = e.category || cats[0] || '';
@@ -1230,12 +1546,22 @@ ${lines}`;
     const del = $('#btnDelete');
     del.hidden = !found; del.textContent = '삭제'; del.classList.remove('armed'); delArmed = 0;
     $$('#entryForm input, #entryForm textarea, #entryForm select').forEach(el => { el.disabled = !S.canWrite; });
-    $('#btnSave').disabled = !S.canWrite; del.disabled = !S.canWrite;
+    $$('.js-save').forEach(b => { b.disabled = !S.canWrite; }); del.disabled = !S.canWrite;
+    $('#entryDlg .dlg-foot').classList.toggle('ph-hide', !found);
+    // 누른 동작 안에서 바로 초점을 줘야 iOS가 키보드를 연다
+    $('#fUnit').autofocus = !found;
     if (!dlg.open) dlg.showModal();
-    if (!found) setTimeout(() => $('#fUnit').focus(), 30);
+    if (!found) $('#fUnit').focus();
+    $('#entryForm').scrollTop = 0; $('#entryDlg .dlg-body').scrollTop = 0;
   }
   $('#fPct').addEventListener('input', e => setPct(e.target.value));
   $('#pctQuick').addEventListener('click', e => { const b = e.target.closest('button[data-pct]'); if (b) setPct(b.dataset.pct); });
+  $('#duePicks').addEventListener('click', ev => {
+    const b = ev.target.closest('button[data-due]'); if (!b || !S.editing) return;
+    const ws = startOfWeek(parseYmd(S.editing.week) || S.weekStart, sd());
+    const fri = addDays(ws, (5 - ws.getDay() + 7) % 7);
+    $('#fDue').value = { today: ymd(today0()), fri: ymd(fri), nextfri: ymd(addDays(fri, 7)), none: '' }[b.dataset.due];
+  });
   $('#entryForm').addEventListener('submit', async ev => {
     ev.preventDefault();
     if (!S.canWrite || !S.editing) return;
@@ -1252,16 +1578,65 @@ ${lines}`;
     });
     if (!e.taskKey) e.taskKey = e.id;
     if (!e.createdAt) e.createdAt = iso();
-    const btn = $('#btnSave'); btn.disabled = true;
+    const btns = $$('.js-save'); btns.forEach(b => { b.disabled = true; });
     try { await putEntry(e); dlg.close(); toast(isNew ? '업무를 추가했습니다.' : '저장했습니다.'); }
     catch (err) { writeErr(err); }
-    finally { btn.disabled = !S.canWrite; }
+    finally { btns.forEach(b => { b.disabled = !S.canWrite; }); }
   });
   $('#btnDelete').addEventListener('click', async () => {
     const btn = $('#btnDelete');
     if (Date.now() - delArmed > 4000) { delArmed = Date.now(); btn.textContent = '한 번 더 누르면 삭제'; btn.classList.add('armed'); return; }
     try { await removeEntry(S.editing.id); dlg.close(); toast('삭제했습니다.'); } catch (err) { writeErr(err); }
   });
+
+  /* ---------- 진행률 빠른 창 ---------- */
+  // 잘못 눌러도 되돌릴 수 있게 고른 뒤 저장 버튼으로 확정한다
+  const pctDlg = $('#pctDlg');
+  let quick = null;
+  function setQuickPct(p) {
+    quick.pct = clampPct(p);
+    $$('#qPct button').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.qpct === quick.pct)));
+    $('#qImpactField').hidden = quick.pct < 100;
+  }
+  function openQuick(id) {
+    const e = S.entries.find(x => x.id === id); if (!e) return;
+    if (!S.canWrite) { openEntry(id); return; }
+    quick = { id, pct: clampPct(e.pct) };
+    $('#qTitle').textContent = e.unit;
+    $('#qMeta').textContent = [e.category, e.due ? fmtDue(e.due) + '까지' : '', `지금 ${quick.pct}%`].filter(Boolean).join(', ');
+    $('#qNow').textContent = e.progressNote ? '지금 진행상황: ' + oneLine(e.progressNote) : '아직 적은 진행상황이 없습니다.';
+    $('#qNote').value = ''; $('#qImpact').value = e.impact || '';
+    setQuickPct(quick.pct);
+    if (!pctDlg.open) pctDlg.showModal();
+  }
+  $('#qPct').addEventListener('click', ev => { const b = ev.target.closest('button[data-qpct]'); if (b && quick) setQuickPct(b.dataset.qpct); });
+  $('#pctForm').addEventListener('submit', async ev => {
+    ev.preventDefault();
+    if (!S.canWrite || !quick) return;
+    const e = S.entries.find(x => x.id === quick.id); if (!e) { pctDlg.close(); return; }
+    const c = clone(e), p = quick.pct, line = $('#qNote').value.trim();
+    c.pct = p;
+    if (line) c.progressNote = c.progressNote ? c.progressNote.replace(/\s+$/, '') + '\n' + line : line;
+    if (p >= 100) c.impact = $('#qImpact').value.trim();
+    if (!c.taskKey) c.taskKey = c.id;
+    const btn = $('#qSave'); btn.disabled = true;
+    try { await putEntry(c); pctDlg.close(); toast(p >= 100 ? '완료로 저장했습니다.' : `${p}%로 저장했습니다.`); }
+    catch (err) { writeErr(err); }
+    finally { btn.disabled = !S.canWrite; }
+  });
+
+  /* ---------- 사용법 ---------- */
+  const helpDlg = $('#helpDlg');
+  function openHelp(sec) {
+    helpMem = true; lsSet(LS_HELP, '1');
+    renderHelpMode();
+    $$('#helpDlg details').forEach(d => { d.open = d.id === sec; });
+    if (!helpDlg.open) helpDlg.showModal();
+    $('#helpDlg form').scrollTop = 0; $('#helpDlg .dlg-body').scrollTop = 0;
+    const target = sec ? $('#' + sec) : null;
+    if (target) target.scrollIntoView({ block: 'start' });
+    scheduleRender();
+  }
 
   /* ---------- 주간 메모 ---------- */
   let memoTimer = null, memoKey = null;
@@ -1329,7 +1704,14 @@ ${lines}`;
     saveFile(`${S.settings.dept || '총무부'}_업무기록_전체_${ymd(today0())}.xlsx`, blob);
   }
   function copyText(text) {
-    const fallback = () => { const a = $('#copyArea'); a.value = text; $('#copyDlg').showModal(); a.focus(); a.select(); };
+    const fallback = () => {
+      const a = $('#copyArea'); a.value = text;
+      $('#copyHint').textContent = matchMedia('(pointer: coarse)').matches
+        ? '자동 복사가 막혀 있습니다. 글을 길게 눌러 전체 선택한 뒤 복사하세요.'
+        : '이 화면에서는 자동 복사가 막혀 있습니다. 선택된 내용을 Ctrl+C(맥은 ⌘+C)로 복사하세요.';
+      $('#copyDlg').showModal(); a.focus(); a.select();
+      try { a.setSelectionRange(0, a.value.length); } catch (e) { /* 무시 */ }
+    };
     try {
       if (!navigator.clipboard || !navigator.clipboard.writeText) { fallback(); return; }
       navigator.clipboard.writeText(text).then(() => toast('복사했습니다.'), fallback);
@@ -1490,6 +1872,7 @@ ${lines}`;
     if (!TABS.includes(t)) t = 'week';
     flushMemo();
     S.tab = t;
+    document.body.dataset.tab = t;
     $$('.nav button').forEach(b => { if (b.dataset.tab === t) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
     TABS.forEach(x => { $('#view-' + x).hidden = x !== t; });
     try { history.replaceState(null, '', '#' + t); } catch (e) { /* 무시 */ }
@@ -1506,6 +1889,15 @@ ${lines}`;
     openEntry: b => openEntry(b.dataset.id),
     closeDlg: () => dlg.close(),
     closeCopy: () => $('#copyDlg').close(),
+    quickPct: b => openQuick(b.dataset.id),
+    closeQuick: () => pctDlg.close(),
+    quickFull: () => { const id = quick && quick.id; pctDlg.close(); if (id) openEntry(id); },
+    help: b => openHelp(b.dataset.sec),
+    closeHelp: () => helpDlg.close(),
+    copyAppUrl: () => copyText(APP_URL),
+    guideClose: () => { guideMem = true; lsSet(LS_GUIDE, 'hidden'); scheduleRender(); },
+    guideReset: () => { guideMem = false; lsSet(LS_GUIDE, null); helpDlg.close(); showTab('week', true); },
+    toggleFilters: b => { const open = $('.filters').classList.toggle('open'); b.setAttribute('aria-expanded', String(open)); renderLog(); },
     carry: doCarry, delExamples, migrate,
     exportWeek, copyWeek, exportAll, backupJson,
     pickImport: () => $('#importFile').click(), runImport,
@@ -1542,6 +1934,10 @@ ${lines}`;
   $('#pfForm').addEventListener('submit', ev => ev.preventDefault());
   let pfDraftTimer = null;
   $('#pfOut').addEventListener('input', () => { clearTimeout(pfDraftTimer); pfDraftTimer = setTimeout(savePfDraft, 600); });
+  // 휴대폰에서 다른 앱으로 넘어가도 적던 메모와 초안이 남게 한다
+  const flushAll = () => { flushMemo(); if (pfDraftTimer) { clearTimeout(pfDraftTimer); pfDraftTimer = null; savePfDraft(); } };
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushAll(); });
+  window.addEventListener('pagehide', flushAll);
   $('#setForm').addEventListener('input', () => { S.settingsDirty = true; $('#setState').textContent = '저장하지 않은 변경이 있습니다.'; });
   $('#setForm').addEventListener('submit', async ev => {
     ev.preventDefault();
